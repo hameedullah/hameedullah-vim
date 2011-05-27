@@ -362,6 +362,19 @@
     map <C-L> <C-W>l<C-W>_
     map <C-H> <C-W>h<C-W>_
 
+    " Tabs {
+        " tab navigation like firefox
+        " taken from http://vim.wikia.com/wiki/Alternative_tab_navigation "
+        nmap <C-S-tab> :tabprevious<CR>
+        nmap <C-tab> :tabnext<CR>
+        map <C-S-tab> :tabprevious<CR>
+        map <C-tab> :tabnext<CR>
+        imap <C-S-tab> <Esc>:tabprevious<CR>i
+        imap <C-tab> <Esc>:tabnext<CR>i
+        nmap <C-t> :tabnew<CR>
+        imap <C-t> <Esc>:tabnew<CR>"
+    " }
+
     " This mapping allows to stay in visual mode when indenting with < and >
     vnoremap > >gv
     vnoremap < <gv
@@ -383,7 +396,6 @@
     map <F5>      :set list!<CR>:set list?<CR>
     imap <F5> <C-O>:set list!<CR><C-O>:set list?<CR>
     nnoremap <silent> <F6> :TlistToggle<CR>
-    nnoremap <silent> <F7> :BufExplorer<CR>
 
     " Useful when I am done with search
     " Map <C-L> (redraw screen) to also turn off search highlighting until the
@@ -392,6 +404,7 @@
 
     " Serch word under cursor in current dir
     map <C-F> <esc>:Grep<CR>
+    map <C-R> <esc>:Rgrep<CR>
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
@@ -430,20 +443,19 @@
     " }
 
 
-        " SnipMate {
+    " SnipMate {
         " Setting the author var
         " If forking, please overwrite in your .vimrc.local file
-        let g:snips_author = 'Steve Francia <steve.francia@gmail.com>'
+        let g:snips_author = 'Hameedullah Khan <h@hameedullah.com>'
         " Shortcut for reloading snippets, useful when developing
         nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
-        " }
+    " }
 
 
     " NerdTree {
         " Key Mappings for NERD Tree Plugin
         map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-        map <leader>e :NERDTreeFind<CR>
-        nmap <leader>nt :NERDTreeFind<CR>
+        nmap <leader>nf :NERDTreeFind<CR>
 
         " Other NERD Tree configurations
         let NERDTreeShowBookmarks=1
@@ -457,7 +469,7 @@
     " Buffer explorer {
         " TODO: Get used to a mapping
         "  Currently the leader based mapping seems very slow
-        nmap <leader>b :BufExplorer<CR>
+        nmap <leader>be :BufExplorer<CR>
         cmap BE BufExplorer
     " }
 
@@ -567,11 +579,6 @@
     "###########################
     "##       PHP             ##
     "###########################
-    " The php doc plugin
-    " source ~/.vim/php-doc.vim 
-    inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
-    nnoremap <C-P> :call PhpDocSingle()<CR> 
-    vnoremap <C-P> :call PhpDocRange()<CR>
 
     " run file with PHP CLI (CTRL-M)
     :autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
