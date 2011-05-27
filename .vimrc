@@ -383,11 +383,15 @@
     map <F5>      :set list!<CR>:set list?<CR>
     imap <F5> <C-O>:set list!<CR><C-O>:set list?<CR>
     nnoremap <silent> <F6> :TlistToggle<CR>
+    nnoremap <silent> <F7> :BufExplorer<CR>
 
     " Useful when I am done with search
     " Map <C-L> (redraw screen) to also turn off search highlighting until the
     " next search
     nnoremap <C-L> :nohl<CR><C-L>
+
+    " Serch word under cursor in current dir
+    map <C-F> <esc>:Grep<CR>
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
@@ -408,9 +412,33 @@
     " Removes trailing whitespaces from code  
     autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
+
 " }
 
-" Plugins {
+" Plugins Specific Settings {
+
+    " Delimitmate {
+        au FileType * let b:delimitMate_autoclose = 1
+
+        " If using html auto complete (complete closing tag)
+        au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
+    " }
+
+    " AutoCloseTag {
+        " Make it so AutoCloseTag works for xml and xhtml files as well
+        au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
+    " }
+
+
+        " SnipMate {
+        " Setting the author var
+        " If forking, please overwrite in your .vimrc.local file
+        let g:snips_author = 'Steve Francia <steve.francia@gmail.com>'
+        " Shortcut for reloading snippets, useful when developing
+        nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
+        " }
+
+
     " NerdTree {
         " Key Mappings for NERD Tree Plugin
         map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -427,7 +455,10 @@
     " }
 
     " Buffer explorer {
+        " TODO: Get used to a mapping
+        "  Currently the leader based mapping seems very slow
         nmap <leader>b :BufExplorer<CR>
+        cmap BE BufExplorer
     " }
 
     " VCS commands {
