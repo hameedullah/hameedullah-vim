@@ -423,7 +423,9 @@
     " mainly for development purpose
 
     " Removes trailing whitespaces from code  
-    autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    " This causes vim to hang for 5-6 seconds when writing some files
+    " shold map it to some key, that will be more useful
+    " autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 
 " }
