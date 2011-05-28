@@ -606,7 +606,7 @@
     " set foldmethod=marker foldopen=all,insert foldclose=all
     " Folding
     set foldmethod=indent foldopen=all,insert foldclose=all
-    set foldlevel=1
+    set foldlevel=0
 
     " to reduce the number of buffers while using sessions
     set ssop-=buffers
