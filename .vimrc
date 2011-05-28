@@ -497,7 +497,7 @@
                         \ 'swap': 'directory' }
 
         for [dirname, settingname] in items(dir_list)
-            let directory = parent . '/' . prefix . dirname . "/"
+            let directory = parent . '/' . prefix . '/' . dirname . "/"
             if exists("*mkdir")
                 if !isdirectory(directory)
                     call mkdir(directory)
