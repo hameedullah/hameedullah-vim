@@ -497,6 +497,8 @@
                         \ 'swap': 'directory' }
 
         for [dirname, settingname] in items(dir_list)
+            " Create backup, views and swap folders inside .vim
+            " I don't like clusttering my homedirectory
             let directory = parent . '/' . prefix . '/' . dirname . "/"
             if exists("*mkdir")
                 if !isdirectory(directory)
