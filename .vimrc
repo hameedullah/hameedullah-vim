@@ -604,8 +604,8 @@
     " do so myself and wouldn't use text folding at all if it wasn't automatic.
     " set foldmethod=marker foldopen=all,insert foldclose=all
     " Folding
-    set foldmethod=indent foldopen=all,insert foldclose=all
     set foldlevel=0
+    set foldopen=all,insert foldclose=all
 
     " to reduce the number of buffers while using sessions
     set ssop-=buffers
