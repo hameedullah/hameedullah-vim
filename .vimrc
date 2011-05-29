@@ -653,6 +653,7 @@
     " PHP Generated Code Highlights (HTML & SQL)                                              
     let php_sql_query=1                                                                                        
     let php_htmlInStrings=1
+    let php_folding=2
 
     " My custom keymaps
     nnoremap ;s :SaveSession <C-R>=ProjectName()<CR><CR>
