@@ -211,8 +211,8 @@
     set timeout timeoutlen=3000 ttimeoutlen=100
 
     " Very useful for me
-    " Use <F10> to toggle between 'paste' and 'nopaste'
-    set pastetoggle=<F10>
+    " Use <F2> to toggle between 'paste' and 'nopaste'
+    set pastetoggle=<F2>
 
     " Stop certain movements from always going to the first character of a line.
     " While this behaviour deviates from that of Vi, it does what most users
@@ -387,8 +387,7 @@
     noremap <down> gj
     noremap <up>   gk
 
-    map <F2>      :set paste!<CR>:set paste?<CR>
-    imap <F2> <C-O>:set paste<CR>:set paste?<CR>
+    " <F2 has been mapped to pastetoggle see :set pastetoggle"
     map <F3>      :set number!<CR>:set number?<CR>
     imap <F3> <C-O>:set number!<CR><C-O>:set number?<CR>
     map <F4>      :set hlsearch!<CR>:set hlsearch?<CR>
