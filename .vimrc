@@ -359,7 +359,7 @@
     " Easier moving in tabs and windows
     map <C-J> <C-W>j<C-W>_
     map <C-K> <C-W>k<C-W>_
-    map <C-L> <C-W>l<C-W>_
+    "map <C-L> <C-W>l<C-W>_
     map <C-H> <C-W>h<C-W>_
 
     " Tabs {
@@ -587,7 +587,7 @@
     :autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
 
     " PHP parser check (CTRL-L)
-    :autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
+    ":autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
 
     " Session.vim settings
     ":let g:session_autosave = 1
