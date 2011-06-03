@@ -655,37 +655,12 @@
     let php_htmlInStrings=1
     let php_folding=2
 
-    " My custom keymaps
-    nnoremap ;s :SaveSession <C-R>=ProjectName()<CR><CR>
-    nnoremap ;o :OpenSession <C-R>=ProjectName()<CR>
-    nnoremap ;c :CloseSession<CR>:q<CR>
-    nnoremap ;r :RestartSession<CR><CR>
-    nnoremap ;t :TlistToggle<CR><CR>
 
-
-    "nnoremap ;p :Project<CR>:r ~/.projects/<C-R>=ProjectName()<CR><CR>
-    nnoremap ;p :Project<CR><CR>
-
-
-    function! ProjectName()
-        if exists("g:ProjectName")
-            return g:ProjectName
-        endif
-    endfunction
-    nnoremap <silent> <F8> :TlistToggle<CR>
     let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
     let Tlist_Show_One_File = 1       " Only show tags for current buffer
     let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
     let tlist_sql_settings = 'sql;P:package;t:table'
     let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
-    " --------------------
-    " Project
-    " --------------------
-    map <A-S-p> :Project<CR>
-    map <A-S-o> :Project<CR>:redraw<CR>/
-    "nmap <silent> <F3> <Plug>ToggleProject
-    "let g:proj_window_width = 30
-    "let g:proj_window_increment = 150
 
     " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
     autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
