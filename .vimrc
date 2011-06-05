@@ -29,9 +29,23 @@
     " Compatibly {
         " We need to set nocompatible mode to stop Vim being compatible with vi
         " This also reset options when you resource your .vimrc
-        set nocompatible 
+	if &compatible
+            set nocompatible 
+	endif
     " }
 
+    set modeline
+
+    " Pathogen {
+        " This is actually the cool idea to keep plugins in their own separate folder to have a cleaner .vim-directory
+        " Giving it a try
+        " Copying spf-13
+        " The next two lines ensure that the ~/.vim/bundle/ system works
+        runtime! autoload/pathogen.vim
+        silent! call pathogen#helptags()
+        silent! call pathogen#runtime_append_all_bundles()
+    " }
+    
     " Color Scheme Loading Fix {
         " Taken from: http://dominique.pelle.free.fr/.vimrc.html
         " Unlet g:color_names to avoid loading color scheme several times
@@ -79,7 +93,6 @@
         set ignorecase
         set smartcase
     " }
-
     " Security {
         " Autowrite unsaved buffers
         " Alternatives include using tabs or split windows instead of re-using the same
@@ -119,18 +132,8 @@
         set showcmd
     " }
 
-    " Pathogen {
-        " This is actually the cool idea to keep plugins in their own separate folder to have a cleaner .vim-directory
-        " Giving it a try
-        " Copying spf-13
-        " The next two lines ensure that the ~/.vim/bundle/ system works
-        runtime! autoload/pathogen.vim
-        silent! call pathogen#helptags()
-        silent! call pathogen#runtime_append_all_bundles()
-    " }
 
 " }
-
 " Usability {
     " Almost all of them are taken from: http://vim.wikia.com/wiki/Example_vimrc
     " These are options that users frequently set in their .vimrc. Some of them
@@ -145,6 +148,13 @@
     " Line wrapping
     set wrap
     set showbreak=+++
+
+    " Set chars to show instead of eol, trailing spaces and non breakable spaces
+    " tab is by default '^I' so we don't need to change it
+    " until somethign else is required in place of tab
+    " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+    " :help listchars "
+    set listchars=eol:$,trail:·,nbsp:·
 
     " Not sure
     " TODO: read more
@@ -259,7 +269,7 @@
             " Broken down into easily includeable segments
             set statusline=%<%f\ " Filename
             set statusline+=%w%h%m%r " Options
-            "set statusline+=%{fugitive#statusline()} " Git Hotness
+            set statusline+=%{fugitive#statusline()} " Git Hotness
             set statusline+=\ [%{&ff}/%Y] " filetype
             set statusline+=\ [%{getcwd()}] " current dir
             "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
@@ -319,10 +329,7 @@
     " }
 
     " Others {
-	set cursorline  				" highlight current line
-	hi cursorline guibg=#333333 	" highlight bg color of current line
-	hi CursorColumn guibg=#333333   " highlight cursor
-
+        set cursorline  " highlight current line
     " }
 
 " }
@@ -347,6 +354,19 @@
 
 " }
 
+" Syntax Highlighting {
+    " PHP Syntax { "
+        " http://www.vim.org/scripts/script.php?script_id=2874
+        let php_sql_query = 1  "for SQL syntax highlighting inside strings
+        let php_html_in_strings = 1  "for HTML syntax highlighting inside strings
+        "php_parent_error_close = 1  "for highlighting parent error ] or )
+        "php_parent_error_open = 1  "for skipping an php end tag, if there exists an open ( or [ without a closing one
+        let php_no_shorttags = 1  "don't sync <? ?> as php
+        let php_folding = 1  "for folding classes and functions
+
+    " }
+" }
+
 " Mappings {
 
     " Taken from spf-13
@@ -365,12 +385,10 @@
     " Tabs {
         " tab navigation like firefox
         " taken from http://vim.wikia.com/wiki/Alternative_tab_navigation "
-        nmap <C-S-tab> :tabprevious<CR>
-        nmap <C-tab> :tabnext<CR>
-        map <C-S-tab> :tabprevious<CR>
-        map <C-tab> :tabnext<CR>
-        imap <C-S-tab> <Esc>:tabprevious<CR>i
-        imap <C-tab> <Esc>:tabnext<CR>i
+        map <C-left> :tabp<CR>
+        map <C-right> :tabn<CR>
+        imap <C-left>   <Esc>:tabp<CR>
+        imap <C-right>  <Esc>:tabn<CR>
         nmap <C-t> :tabnew<CR>
         imap <C-t> <Esc>:tabnew<CR>"
     " }
@@ -378,6 +396,12 @@
     " This mapping allows to stay in visual mode when indenting with < and >
     vnoremap > >gv
     vnoremap < <gv
+    " Indenting via tab"
+    "inoremap <S-Tab> <C-O><lt><lt>
+    "nnoremap <Tab> >>
+    "nnoremap <S-Tab> <lt><lt>
+    "vnoremap <Tab> >
+    "vnoremap <S-Tab> <lt>
 
     noremap <c-]> g<c-]>
     noremap <c-g> g<c-g>
@@ -392,9 +416,9 @@
     imap <F3> <C-O>:set number!<CR><C-O>:set number?<CR>
     map <F4>      :set hlsearch!<CR>:set hlsearch?<CR>
     imap <F4> <C-O>:set hlsearch!<CR><C-O>:set hlsearch?<CR>
-    map <F5>      :set list!<CR>:set list?<CR>
-    imap <F5> <C-O>:set list!<CR><C-O>:set list?<CR>
-    nnoremap <silent> <F6> :TlistToggle<CR>
+    map <C-F5>      :set list!<CR>:set list?<CR>
+    imap <C-F5> <C-O>:set list!<CR><C-O>:set list?<CR>
+    nnoremap <silent> <C-F6> :TlistToggle<CR>
 
     " Useful when I am done with search
     " Map <C-L> (redraw screen) to also turn off search highlighting until the
@@ -415,6 +439,42 @@
 
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
+" }
+
+" Auto Complete {
+        " OmniComplete {
+                "if has("autocmd") && exists("+omnifunc")
+                        "autocmd Filetype *
+                                "\if &omnifunc == "" |
+                                "\setlocal omnifunc=syntaxcomplete#Complete |
+                                "\endif
+                "endif
+
+                " Popup menu hightLight Group
+                "highlight Pmenu        ctermbg=13      guibg=DarkBlue
+        "highlight PmenuSel     ctermbg=7       guibg=DarkBlue          guifg=LightBlue
+                "highlight PmenuSbar ctermbg=7  guibg=DarkGray
+                "highlight PmenuThumb                   guibg=Black
+
+                "hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+                "hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+                "hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+
+                " some convenient mappings 
+                inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+                inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+                inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+                inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+                inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+                inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+                " and make sure that it doesn't break supertab
+                let g:SuperTabCrMapping = 0
+        
+                " automatically open and close the popup menu / preview window
+                au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+                set completeopt=menu,preview,longest
+        " }
 " }
 
 " FileType Commands and Settings {
@@ -452,10 +512,18 @@
         nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
     " }
 
+    " Super Tab {"
+        " When using context completion, super tab will fall back to a secondary default
+        " completion type set by |g:SuperTabContextDefaultCompletionType|.
+        let g:SuperTabDefaultCompletionType = "context"
+        let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
-    " NerdTree {
+    " }
+
+    " NERDTree {
         " Key Mappings for NERD Tree Plugin
         map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+        map <leader>e :NERDTreeFind<CR>
         nmap <leader>nf :NERDTreeFind<CR>
 
         " Other NERD Tree configurations
@@ -466,6 +534,7 @@
         let NERDTreeShowHidden=1
         let NERDTreeKeepTreeInNewTab=1
     " }
+
 
     " Buffer explorer {
         " TODO: Get used to a mapping
@@ -483,6 +552,79 @@
         nmap <leader>vl :VCSLog<CR>
         nmap <leader>vu :VCSUpdate<CR>
     " }
+
+    " VimDebugger {
+        " Eclipse debugger commands
+        "   F5      Step into
+        "   F6      Step over
+        "   F7      Run to return
+        "   F8      Resume
+        "   F9       Relaunch last
+        "   F11     Run/debug last
+        "   Ctrl F11        Run
+        "   Ctrl Shift B    Toggle breakpoint
+        "   Ctrl D  Display
+        "   Ctrl Q  Inspect
+        "    Ctrl R  Run to line
+        "    Ctrl U  Run snippet
+        map <F5> :DbgStepInto<CR>
+        map <S-F5> :DbgStepOut<CR>
+        map <F6> :DbgStepOver<CR>
+        map <C-F11> :DbgRun<CR> 
+        " TODO: Play with debug detach and map it if useful
+        "map <F6> :DbgDetach<CR>
+        "map <F8> :DbgToggleBreakpoint<CR>
+        map <C-S-B> :DbgToggleBreakpoint<CR>
+        map <S-F8> :DbgFlushBreakpoints<CR>
+        map <F9> :DbgRefreshWatch<CR>
+        map <S-F9> :DbgAddWatch<CR>
+    " }
+    " Lusty Eplorer and Juggler {
+        " Lusty Explorer default key mappings
+        ":LustyFilesystemExplorer 
+        ":LustyFilesystemExplorerFromHere 
+        ":LustyBufferExplorer 
+        ":LustyBufferGrep (for searching through all open buffers) 
+
+        "<Leader>lf  - Opens filesystem explorer. 
+        "<Leader>lr  - Opens filesystem explorer at the directory of the current file.   
+        "<Leader>lb  - Opens buffer explorer. 
+        "<Leader>lg  - Opens buffer grep. 
+
+        " Lusty juggler default key mappings
+        " very useful for quickly switching between recently opened buffers
+        " buffer explorer is always there to see all opened buffers with useful information
+        " but this one allows you to quickly swtich between them and lists them
+        " in recently opened order
+        "Launch the juggler with this key combo: 
+
+        "<Leader>lj 
+
+        "The command bar at bottom is replaced with a new bar showing the names of your currently opened buffers in most-recently-used order. 
+
+        "The buffer names are mapped to these keys: 
+
+        "1st --> a or 1 
+        "2nd --> s or 2 
+        "3rd --> d or 3 
+        "4th --> f or 4 
+        "5th --> g or 5 
+        "6th --> h or 6 
+        "7th --> j or 7 
+        "8th --> k or 8 
+        "9th --> l or 9 
+        "10th --> ; or 0 
+
+        "So if you type "f" or "4", the fourth buffer name will be highlighted and the bar will shift to center it as necessary (and show more of the buffer names on the right). 
+
+        "If you want to switch to that buffer, press "f" or "4" again or press "<ENTER>".  Alternatively, press one of the other mapped keys to highlight another buffer. 
+    " }
+    " Tasklist {
+        " A todo reminder plugin that lists all your TODO, FIXME in current file:
+        " http://www.vim.org/scripts/script.php?script_id=2607
+
+        "<Leader>t
+    " }
 " }
 
 " Functions {
@@ -490,10 +632,7 @@
         let separator = "."
         let parent = $HOME
         let prefix = '.vim'
-        let dir_list = {
-                        \ 'backup': 'backupdir',
-                        \ 'views': 'viewdir',
-                        \ 'swap': 'directory' }
+        let dir_list = { 'backup': 'backupdir', 'views': 'viewdir', 'swap': 'directory' }
 
         for [dirname, settingname] in items(dir_list)
             " Create backup, views and swap folders inside .vim
@@ -509,186 +648,11 @@
                 echo "Try: mkdir -p " . directory
             else
                 let directory = substitute(directory, " ", "\\\\ ", "")
-                exec "set " . settingname . "=" . directory
+                let thesetting = 'set ' . settingname . '=' . directory
+                exec thesetting
             endif
         endfor
     endfunction
     call InitializeDirectories() 
-" }
-
-" Other Not Aligned Options {
-    if has('autocmd')
-    " Source .vimrc when I write it.  The nested keyword allows
-    " autocommand ColorScheme to fire when sourcing ~/.vimrc.
-    au! BufWritePost .vimrc nested source %
-
-    " Change color of cursor in terminal:
-    " - red in normal mode.
-    " - orange in insert mode.
-    " Tip found there:
-    "   http://forums.macosxhints.com/archive/index.php/t-49708.html
-    " It works at least with: xterm rxvt eterm
-    " But do nothing with: gnome-terminal terminator konsole xfce4-terminal
-    "if version >= 700
-    "    if &term =~ "xterm\\|rxvt"
-    "    ":silent !echo -ne "\033]12;red\007"
-    "    let &t_SI = "\033]12;orange\007"
-    "    let &t_EI = "\033]12;red\007"
-    "    au! VimLeave * :sil !echo -ne "\033]12;red\007"
-    "    endif
-    "endif
-
-    " vim -b : edit binary using xxd-format
-    " See :help hex-editing
-    "augroup Binary
-    "    au!
-    "    au BufReadPre   *.dat let &bin=1
-    "    au BufReadPost  *.dat if  &bin   | %!xxd
-    "    au BufReadPost  *.dat set ft=xxd | endif
-    "    au BufWritePre  *.dat if  &bin   | %!xxd -r
-    "    au BufWritePre  *.dat endif
-    "    au BufWritePost *.dat if  &bin   | %!xxd
-    "    au BufWritePost *.dat set nomod  | endif
-    "augroup END
-
-    endif
-
-    """ Test these options and then enable only that suite my style.
-    "set completeopt=menu
-    "set display=lastline showbreak=>>>\
-    "set ignorecase smartcase infercase
-    "set incsearch
-    "set linebreak nojoinspaces
-    "set modeline
-    "set path=.,~/.vim/** suffixesadd=.vim
-    "set ruler
-    "set tabpagemax=25
-    "set tabstop=2 shiftwidth=2
-    "set tags=./.tags;
-
-    " Don't remember source of this, i think it was already in my .vimrc
-
-    " omnicomplete from: http://vim.wikia.com/wiki/VimTip1386
-    set completeopt=longest,menuone
-    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-    \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-    " this key mapping never worked for me
-    "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : "  
-    "    \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-
-    "###########################
-    "##       PHP             ##
-    "###########################
-
-    " run file with PHP CLI (CTRL-M)
-    :autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
-
-    " PHP parser check (CTRL-L)
-    ":autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
-
-    " Session.vim settings
-    ":let g:session_autosave = 1
-    ":let g:session_autoload = 1
-
-    " Taken from http://peterodding.com/code/vim/profile/vimrc
-    " Do use the currently active spell checking for completion though!
-    " (I love this feature :-)
-    set complete+=kspell
-
-
-    " Taken from http://peterodding.com/code/vim/profile/vimrc
-    " Make Vim open and close folded text as needed because I can't be bothered to
-    " do so myself and wouldn't use text folding at all if it wasn't automatic.
-    " set foldmethod=marker foldopen=all,insert foldclose=all
-    " Folding
-    set foldlevel=0
-    set foldopen=all,insert foldclose=all
-
-    " to reduce the number of buffers while using sessions
-    set ssop-=buffers
-
-
-
-    " Automatic commands. {
-
-        autocmd FileType c setlocal cms=/*%s*/
-        autocmd FileType gitcommit setlocal autoindent
-        autocmd FileType sh setlocal isfname-==
-        autocmd FileType sh,php setlocal textwidth=0
-        autocmd BufReadPost */etc/* setlocal textwidth=0
-        autocmd BufReadPost */var/log/* setlocal ft=messages
-        autocmd FileType messages setlocal nowrap nomodifiable nospell
-        autocmd SwapExists * let v:swapchoice = 'e'
-        autocmd BufReadPost ~/.vim-plugin-tool.conf setl ft=dosini nospell
-
-        " Automatically sort word lists and generate spell files.
-        autocmd BufWritePre */spell/*.add %sort i
-        autocmd BufWritePost */spell/*.add silent mkspell! %
-
-        " Enable completion dictionaries for PHP and Python buffers.
-        "autocmd FileType python set complete+=k~/.vim/dict/python " isk+=.,(
-        autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
-        "autocmd FileType lua set complete+=k~/.vim/dict/lua
-
-        " Enable omni-completion in Python scripts.
-        autocmd FileType python set omnifunc=pythoncomplete#Complete
-
-        " Hide # comment markers from folded text in Python scripts.
-        autocmd FileType python set commentstring=#%s
-
-        " PHP Autocomplete
-        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-        set ofu=syntaxcomplete#Complete
-
-
-        " Note, perl automatically sets foldmethod in the syntax file
-        autocmd Syntax c,cpp,vim,xml,html,xhtml,php,py setlocal foldmethod=syntax
-        autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
-    " }
-
-    " You might also find this useful
-    " PHP Generated Code Highlights (HTML & SQL)                                              
-    let php_sql_query=1                                                                                        
-    let php_htmlInStrings=1
-    let php_folding=2
-
-    " My custom keymaps
-    nnoremap ;s :SaveSession <C-R>=ProjectName()<CR><CR>
-    nnoremap ;o :OpenSession <C-R>=ProjectName()<CR>
-    nnoremap ;c :CloseSession<CR>:q<CR>
-    nnoremap ;r :RestartSession<CR><CR>
-    nnoremap ;t :TlistToggle<CR><CR>
-
-
-    "nnoremap ;p :Project<CR>:r ~/.projects/<C-R>=ProjectName()<CR><CR>
-    nnoremap ;p :Project<CR><CR>
-
-
-    function! ProjectName()
-        if exists("g:ProjectName")
-            return g:ProjectName
-        endif
-    endfunction
-    nnoremap <silent> <F8> :TlistToggle<CR>
-    let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
-    let Tlist_Show_One_File = 1       " Only show tags for current buffer
-    let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
-    let tlist_sql_settings = 'sql;P:package;t:table'
-    let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
-    " --------------------
-    " Project
-    " --------------------
-    map <A-S-p> :Project<CR>
-    map <A-S-o> :Project<CR>:redraw<CR>/
-    "nmap <silent> <F3> <Plug>ToggleProject
-    "let g:proj_window_width = 30
-    "let g:proj_window_increment = 150
-
-    " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-    autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
-
 " }
 
