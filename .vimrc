@@ -134,6 +134,7 @@
 
 
 " }
+
 " Usability {
     " Almost all of them are taken from: http://vim.wikia.com/wiki/Example_vimrc
     " These are options that users frequently set in their .vimrc. Some of them
@@ -300,6 +301,23 @@
             "set statusline+=%-6.(%l/%{line('$')},%c%V%)\ %<%P           " position
         endif
 
+    " }
+    " Folding {
+        set foldmethod=syntax
+        set foldlevelstart=1
+        " auto open and close folds, comment the following line if you don't
+        " liek that "
+        set foldopen=all,insert
+        set foldclose=all
+
+        let javaScript_fold=1         " JavaScript
+        let perl_fold=1               " Perl
+        let php_folding=1             " PHP
+        let r_syntax_folding=1        " R
+        let ruby_fold=1               " Ruby
+        let sh_fold_enabled=1         " sh
+        let vimsyn_folding='af'       " Vim script
+        let xml_syntax_folding=1      " XML
     " }
 " }
 
@@ -624,6 +642,20 @@
         " http://www.vim.org/scripts/script.php?script_id=2607
 
         "<Leader>t
+    " }
+    " Taglist {
+        " Taken from spf-13
+        let Tlist_Auto_Highlight_Tag = 1
+        let Tlist_Auto_Update = 1
+        let Tlist_Exit_OnlyWindow = 1
+        let Tlist_File_Fold_Auto_Close = 1
+        let Tlist_Highlight_Tag_On_BufEnter = 1
+        let Tlist_Use_Right_Window = 1
+        let Tlist_Use_SingleClick = 1
+
+        let g:ctags_statusline=1
+        " Override how taglist does javascript
+        let g:tlist_javascript_settings = 'javascript;f:function;c:class;m:method;p:property;v:global'
     " }
 " }
 
