@@ -746,10 +746,10 @@
     " Don't remember source of this, i think it was already in my .vimrc
 
     " omnicomplete from: http://vim.wikia.com/wiki/VimTip1386
-    set completeopt=longest,menuone
-    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-    \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+    "set completeopt=longest,menuone
+    "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    "inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+    "\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
     " this key mapping never worked for me
     "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : "  
