@@ -34,7 +34,9 @@
 	endif
     " }
 
-    set modeline
+    " Modeline { "
+        set modeline
+    "}
 
     " Pathogen {
         " This is actually the cool idea to keep plugins in their own separate folder to have a cleaner .vim-directory
@@ -93,6 +95,7 @@
         set ignorecase
         set smartcase
     " }
+    "
     " Security {
         " Autowrite unsaved buffers
         " Alternatives include using tabs or split windows instead of re-using the same
@@ -470,12 +473,12 @@
             "endif
 
             " some convenient mappings 
-            inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-            inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-            inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-            inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-            inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-            inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+            "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+            "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+            "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+            "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+            "inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+            "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
             " and make sure that it doesn't break supertab
             let g:SuperTabCrMapping = 0
@@ -485,11 +488,11 @@
             set completeopt=menu,preview,longest
         " }
         " Python Auto Complete {
-        autocmd FileType python set omnifunc=pythoncomplete#Complete
+            autocmd FileType python set omnifunc=pythoncomplete#Complete
         
-         "let g:pydiction_location = $VIMRUNTIME.'/dict/python-complete-dict' 
-         let g:pydiction_location = '/home/hameed/Development/vim/hameedullah-vim/.vim/bundle/pythondiction/dict/python-complete-dict' 
-
+            " instead of hardcoding path, this config var is moved to plugin
+            " directory under pythondiction bundle, its now set on runtime"
+            "let g:pydiction_location = '/path/to/complete-dict'
         " }
 " }
 
