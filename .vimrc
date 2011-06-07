@@ -29,9 +29,23 @@
     " Compatibly {
         " We need to set nocompatible mode to stop Vim being compatible with vi
         " This also reset options when you resource your .vimrc
-        set nocompatible 
+	if &compatible
+            set nocompatible 
+	endif
     " }
 
+    set modeline
+
+    " Pathogen {
+        " This is actually the cool idea to keep plugins in their own separate folder to have a cleaner .vim-directory
+        " Giving it a try
+        " Copying spf-13
+        " The next two lines ensure that the ~/.vim/bundle/ system works
+        runtime! autoload/pathogen.vim
+        silent! call pathogen#helptags()
+        silent! call pathogen#runtime_append_all_bundles()
+    " }
+    
     " Color Scheme Loading Fix {
         " Taken from: http://dominique.pelle.free.fr/.vimrc.html
         " Unlet g:color_names to avoid loading color scheme several times
@@ -79,7 +93,6 @@
         set ignorecase
         set smartcase
     " }
-
     " Security {
         " Autowrite unsaved buffers
         " Alternatives include using tabs or split windows instead of re-using the same
@@ -119,15 +132,6 @@
         set showcmd
     " }
 
-    " Pathogen {
-        " This is actually the cool idea to keep plugins in their own separate folder to have a cleaner .vim-directory
-        " Giving it a try
-        " Copying spf-13
-        " The next two lines ensure that the ~/.vim/bundle/ system works
-        runtime! autoload/pathogen.vim
-        silent! call pathogen#helptags()
-        silent! call pathogen#runtime_append_all_bundles()
-    " }
 
 " }
 
@@ -145,6 +149,13 @@
     " Line wrapping
     set wrap
     set showbreak=+++
+
+    " Set chars to show instead of eol, trailing spaces and non breakable spaces
+    " tab is by default '^I' so we don't need to change it
+    " until somethign else is required in place of tab
+    " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+    " :help listchars "
+    set listchars=eol:$,trail:·,nbsp:·
 
     " Not sure
     " TODO: read more
@@ -291,6 +302,23 @@
         endif
 
     " }
+    " Folding {
+        set foldmethod=syntax
+        set foldlevelstart=1
+        " auto open and close folds, comment the following line if you don't
+        " liek that "
+        set foldopen=all,insert
+        set foldclose=all
+
+        let javaScript_fold=1         " JavaScript
+        let perl_fold=1               " Perl
+        let php_folding=1             " PHP
+        let r_syntax_folding=1        " R
+        let ruby_fold=1               " Ruby
+        let sh_fold_enabled=1         " sh
+        let vimsyn_folding='af'       " Vim script
+        let xml_syntax_folding=1      " XML
+    " }
 " }
 
 " Vim User Interface {
@@ -319,10 +347,7 @@
     " }
 
     " Others {
-	set cursorline  				" highlight current line
-	hi cursorline guibg=#333333 	" highlight bg color of current line
-	hi CursorColumn guibg=#333333   " highlight cursor
-
+        set cursorline  " highlight current line
     " }
 
 " }
@@ -347,6 +372,19 @@
 
 " }
 
+" Syntax Highlighting {
+    " PHP Syntax { "
+        " http://www.vim.org/scripts/script.php?script_id=2874
+        let php_sql_query = 1  "for SQL syntax highlighting inside strings
+        let php_html_in_strings = 1  "for HTML syntax highlighting inside strings
+        "php_parent_error_close = 1  "for highlighting parent error ] or )
+        "php_parent_error_open = 1  "for skipping an php end tag, if there exists an open ( or [ without a closing one
+        let php_no_shorttags = 1  "don't sync <? ?> as php
+        let php_folding = 1  "for folding classes and functions
+
+    " }
+" }
+
 " Mappings {
 
     " Taken from spf-13
@@ -365,12 +403,10 @@
     " Tabs {
         " tab navigation like firefox
         " taken from http://vim.wikia.com/wiki/Alternative_tab_navigation "
-        nmap <C-S-tab> :tabprevious<CR>
-        nmap <C-tab> :tabnext<CR>
-        map <C-S-tab> :tabprevious<CR>
-        map <C-tab> :tabnext<CR>
-        imap <C-S-tab> <Esc>:tabprevious<CR>i
-        imap <C-tab> <Esc>:tabnext<CR>i
+        map <C-left> :tabp<CR>
+        map <C-right> :tabn<CR>
+        imap <C-left>   <Esc>:tabp<CR>
+        imap <C-right>  <Esc>:tabn<CR>
         nmap <C-t> :tabnew<CR>
         imap <C-t> <Esc>:tabnew<CR>"
     " }
@@ -378,6 +414,12 @@
     " This mapping allows to stay in visual mode when indenting with < and >
     vnoremap > >gv
     vnoremap < <gv
+    " Indenting via tab"
+    "inoremap <S-Tab> <C-O><lt><lt>
+    "nnoremap <Tab> >>
+    "nnoremap <S-Tab> <lt><lt>
+    "vnoremap <Tab> >
+    "vnoremap <S-Tab> <lt>
 
     noremap <c-]> g<c-]>
     noremap <c-g> g<c-g>
@@ -392,9 +434,9 @@
     imap <F3> <C-O>:set number!<CR><C-O>:set number?<CR>
     map <F4>      :set hlsearch!<CR>:set hlsearch?<CR>
     imap <F4> <C-O>:set hlsearch!<CR><C-O>:set hlsearch?<CR>
-    map <F5>      :set list!<CR>:set list?<CR>
-    imap <F5> <C-O>:set list!<CR><C-O>:set list?<CR>
-    nnoremap <silent> <F6> :TlistToggle<CR>
+    map <C-F5>      :set list!<CR>:set list?<CR>
+    imap <C-F5> <C-O>:set list!<CR><C-O>:set list?<CR>
+    nnoremap <silent> <C-F6> :TlistToggle<CR>
 
     " Useful when I am done with search
     " Map <C-L> (redraw screen) to also turn off search highlighting until the
@@ -415,6 +457,40 @@
 
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
+" }
+
+" Auto Complete {
+        " OmniComplete {
+            " Taken form spf13"
+            "if has("autocmd") && exists("+omnifunc")
+                    "autocmd Filetype *
+                            "\if &omnifunc == "" |
+                            "\setlocal omnifunc=syntaxcomplete#Complete |
+                            "\endif
+            "endif
+
+            " some convenient mappings 
+            "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+            "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+            "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+            "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+            "inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+            "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+            " and make sure that it doesn't break supertab
+            let g:SuperTabCrMapping = 0
+
+            " automatically open and close the popup menu / preview window
+            "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+            "set completeopt=menu,preview,longest
+        " }
+        " Python Auto Complete {
+        autocmd FileType python set omnifunc=pythoncomplete#Complete
+        
+         "let g:pydiction_location = $VIMRUNTIME.'/dict/python-complete-dict' 
+         "let g:pydiction_location = '/home/hameed/Development/vim/hameedullah-vim/.vim/bundle/pythondiction/dict/python-complete-dict' 
+
+        " }
 " }
 
 " FileType Commands and Settings {
@@ -452,10 +528,18 @@
         nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
     " }
 
+    " Super Tab {"
+        " When using context completion, super tab will fall back to a secondary default
+        " completion type set by |g:SuperTabContextDefaultCompletionType|.
+        let g:SuperTabDefaultCompletionType = "context"
+        let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
-    " NerdTree {
+    " }
+
+    " NERDTree {
         " Key Mappings for NERD Tree Plugin
         map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+        map <leader>e :NERDTreeFind<CR>
         nmap <leader>nf :NERDTreeFind<CR>
 
         " Other NERD Tree configurations
@@ -466,6 +550,7 @@
         let NERDTreeShowHidden=1
         let NERDTreeKeepTreeInNewTab=1
     " }
+
 
     " Buffer explorer {
         " TODO: Get used to a mapping
@@ -483,6 +568,97 @@
         nmap <leader>vl :VCSLog<CR>
         nmap <leader>vu :VCSUpdate<CR>
     " }
+
+    " VimDebugger {
+        " Eclipse debugger commands
+        "   F5      Step into
+        "   F6      Step over
+        "   F7      Run to return
+        "   F8      Resume
+        "   F9       Relaunch last
+        "   F11     Run/debug last
+        "   Ctrl F11        Run
+        "   Ctrl Shift B    Toggle breakpoint
+        "   Ctrl D  Display
+        "   Ctrl Q  Inspect
+        "    Ctrl R  Run to line
+        "    Ctrl U  Run snippet
+        map <F5> :DbgStepInto<CR>
+        map <S-F5> :DbgStepOut<CR>
+        map <F6> :DbgStepOver<CR>
+        map <C-F11> :DbgRun<CR> 
+        " TODO: Play with debug detach and map it if useful
+        "map <F6> :DbgDetach<CR>
+        "map <F8> :DbgToggleBreakpoint<CR>
+        map <C-S-B> :DbgToggleBreakpoint<CR>
+        map <S-F8> :DbgFlushBreakpoints<CR>
+        map <F9> :DbgRefreshWatch<CR>
+        map <S-F9> :DbgAddWatch<CR>
+    " }
+    " Lusty Eplorer and Juggler {
+        " Lusty Explorer default key mappings
+        ":LustyFilesystemExplorer 
+        ":LustyFilesystemExplorerFromHere 
+        ":LustyBufferExplorer 
+        ":LustyBufferGrep (for searching through all open buffers) 
+
+        "<Leader>lf  - Opens filesystem explorer. 
+        "<Leader>lr  - Opens filesystem explorer at the directory of the current file.   
+        "<Leader>lb  - Opens buffer explorer. 
+        "<Leader>lg  - Opens buffer grep. 
+
+        " Lusty juggler default key mappings
+        " very useful for quickly switching between recently opened buffers
+        " buffer explorer is always there to see all opened buffers with useful information
+        " but this one allows you to quickly swtich between them and lists them
+        " in recently opened order
+        "Launch the juggler with this key combo: 
+
+        "<Leader>lj 
+
+        "The command bar at bottom is replaced with a new bar showing the names of your currently opened buffers in most-recently-used order. 
+
+        "The buffer names are mapped to these keys: 
+
+        "1st --> a or 1 
+        "2nd --> s or 2 
+        "3rd --> d or 3 
+        "4th --> f or 4 
+        "5th --> g or 5 
+        "6th --> h or 6 
+        "7th --> j or 7 
+        "8th --> k or 8 
+        "9th --> l or 9 
+        "10th --> ; or 0 
+
+        "So if you type "f" or "4", the fourth buffer name will be highlighted and the bar will shift to center it as necessary (and show more of the buffer names on the right). 
+
+        "If you want to switch to that buffer, press "f" or "4" again or press "<ENTER>".  Alternatively, press one of the other mapped keys to highlight another buffer. 
+    " }
+    " Tasklist {
+        " A todo reminder plugin that lists all your TODO, FIXME in current file:
+        " http://www.vim.org/scripts/script.php?script_id=2607
+
+        "<Leader>t
+        map <leader>ta <Plug>TaskList
+
+        let g:tlWindowPosition=1
+
+    " }
+    " Taglist {
+        " Taken from spf-13
+        let Tlist_Auto_Highlight_Tag = 1
+        let Tlist_Auto_Update = 1
+        let Tlist_Exit_OnlyWindow = 1
+        let Tlist_File_Fold_Auto_Close = 1
+        let Tlist_Highlight_Tag_On_BufEnter = 1
+        let Tlist_Use_Right_Window = 1
+        let Tlist_Use_SingleClick = 1
+
+        let g:ctags_statusline=1
+        " Override how taglist does javascript
+        let g:tlist_javascript_settings = 'javascript;f:function;c:class;m:method;p:property;v:global'
+    " }
 " }
 
 " Functions {
@@ -490,10 +666,7 @@
         let separator = "."
         let parent = $HOME
         let prefix = '.vim'
-        let dir_list = {
-                        \ 'backup': 'backupdir',
-                        \ 'views': 'viewdir',
-                        \ 'swap': 'directory' }
+        let dir_list = { 'backup': 'backupdir', 'views': 'viewdir', 'swap': 'directory' }
 
         for [dirname, settingname] in items(dir_list)
             " Create backup, views and swap folders inside .vim
@@ -509,7 +682,8 @@
                 echo "Try: mkdir -p " . directory
             else
                 let directory = substitute(directory, " ", "\\\\ ", "")
-                exec "set " . settingname . "=" . directory
+                let thesetting = 'set ' . settingname . '=' . directory
+                exec thesetting
             endif
         endfor
     endfunction
