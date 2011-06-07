@@ -640,6 +640,10 @@
         " http://www.vim.org/scripts/script.php?script_id=2607
 
         "<Leader>t
+        map <leader>ta <Plug>TaskList
+
+        let g:tlWindowPosition=1
+
     " }
     " Taglist {
         " Taken from spf-13
