@@ -487,8 +487,6 @@
         " Python Auto Complete {
         autocmd FileType python set omnifunc=pythoncomplete#Complete
         
-         "let g:pydiction_location = $VIMRUNTIME.'/dict/python-complete-dict' 
-         "let g:pydiction_location = '/home/hameed/Development/vim/hameedullah-vim/.vim/bundle/pythondiction/dict/python-complete-dict' 
 
         " }
 " }
