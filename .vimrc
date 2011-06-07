@@ -273,7 +273,7 @@
             " Broken down into easily includeable segments
             set statusline=%<%f\ " Filename
             set statusline+=%w%h%m%r " Options
-            set statusline+=%{fugitive#statusline()} " Git Hotness
+            "set statusline+=%{fugitive#statusline()} " Git Hotness
             set statusline+=\ [%{&ff}/%Y] " filetype
             set statusline+=\ [%{getcwd()}] " current dir
             "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
@@ -484,8 +484,8 @@
             let g:SuperTabCrMapping = 0
 
             " automatically open and close the popup menu / preview window
-            au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-            set completeopt=menu,preview,longest
+            "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+            "set completeopt=menu,preview,longest
         " }
         " Python Auto Complete {
             autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -643,6 +643,10 @@
         " http://www.vim.org/scripts/script.php?script_id=2607
 
         "<Leader>t
+        map <leader>ta <Plug>TaskList
+
+        let g:tlWindowPosition=1
+
     " }
     " Taglist {
         " Taken from spf-13
@@ -687,5 +691,156 @@
         endfor
     endfunction
     call InitializeDirectories() 
+" }
+
+" Other Not Aligned Options {
+    if has('autocmd')
+    " Source .vimrc when I write it.  The nested keyword allows
+    " autocommand ColorScheme to fire when sourcing ~/.vimrc.
+    au! BufWritePost .vimrc nested source %
+
+    " Change color of cursor in terminal:
+    " - red in normal mode.
+    " - orange in insert mode.
+    " Tip found there:
+    "   http://forums.macosxhints.com/archive/index.php/t-49708.html
+    " It works at least with: xterm rxvt eterm
+    " But do nothing with: gnome-terminal terminator konsole xfce4-terminal
+    "if version >= 700
+    "    if &term =~ "xterm\\|rxvt"
+    "    ":silent !echo -ne "\033]12;red\007"
+    "    let &t_SI = "\033]12;orange\007"
+    "    let &t_EI = "\033]12;red\007"
+    "    au! VimLeave * :sil !echo -ne "\033]12;red\007"
+    "    endif
+    "endif
+
+    " vim -b : edit binary using xxd-format
+    " See :help hex-editing
+    "augroup Binary
+    "    au!
+    "    au BufReadPre   *.dat let &bin=1
+    "    au BufReadPost  *.dat if  &bin   | %!xxd
+    "    au BufReadPost  *.dat set ft=xxd | endif
+    "    au BufWritePre  *.dat if  &bin   | %!xxd -r
+    "    au BufWritePre  *.dat endif
+    "    au BufWritePost *.dat if  &bin   | %!xxd
+    "    au BufWritePost *.dat set nomod  | endif
+    "augroup END
+
+    endif
+
+    """ Test these options and then enable only that suite my style.
+    "set completeopt=menu
+    "set display=lastline showbreak=>>>\
+    "set ignorecase smartcase infercase
+    "set incsearch
+    "set linebreak nojoinspaces
+    "set modeline
+    "set path=.,~/.vim/** suffixesadd=.vim
+    "set ruler
+    "set tabpagemax=25
+    "set tabstop=2 shiftwidth=2
+    "set tags=./.tags;
+
+    " Don't remember source of this, i think it was already in my .vimrc
+
+    " omnicomplete from: http://vim.wikia.com/wiki/VimTip1386
+    set completeopt=longest,menuone
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+    \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+    " this key mapping never worked for me
+    "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : "  
+    "    \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+
+    "###########################
+    "##       PHP             ##
+    "###########################
+
+    " run file with PHP CLI (CTRL-M)
+    :autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
+
+    " PHP parser check (CTRL-L)
+    ":autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
+
+    " Session.vim settings
+    ":let g:session_autosave = 1
+    ":let g:session_autoload = 1
+
+    " Taken from http://peterodding.com/code/vim/profile/vimrc
+    " Do use the currently active spell checking for completion though!
+    " (I love this feature :-)
+    set complete+=kspell
+
+
+    " Taken from http://peterodding.com/code/vim/profile/vimrc
+    " Make Vim open and close folded text as needed because I can't be bothered to
+    " do so myself and wouldn't use text folding at all if it wasn't automatic.
+    " set foldmethod=marker foldopen=all,insert foldclose=all
+    " Folding
+    set foldlevel=0
+    set foldopen=all,insert foldclose=all
+
+    " to reduce the number of buffers while using sessions
+    set ssop-=buffers
+
+
+
+    " Automatic commands. {
+
+        autocmd FileType c setlocal cms=/*%s*/
+        autocmd FileType gitcommit setlocal autoindent
+        autocmd FileType sh setlocal isfname-==
+        autocmd FileType sh,php setlocal textwidth=0
+        autocmd BufReadPost */etc/* setlocal textwidth=0
+        autocmd BufReadPost */var/log/* setlocal ft=messages
+        autocmd FileType messages setlocal nowrap nomodifiable nospell
+        autocmd SwapExists * let v:swapchoice = 'e'
+        autocmd BufReadPost ~/.vim-plugin-tool.conf setl ft=dosini nospell
+
+        " Automatically sort word lists and generate spell files.
+        autocmd BufWritePre */spell/*.add %sort i
+        autocmd BufWritePost */spell/*.add silent mkspell! %
+
+        " Enable completion dictionaries for PHP and Python buffers.
+        "autocmd FileType python set complete+=k~/.vim/dict/python " isk+=.,(
+        autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
+        "autocmd FileType lua set complete+=k~/.vim/dict/lua
+
+        " Enable omni-completion in Python scripts.
+        autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+        " Hide # comment markers from folded text in Python scripts.
+        autocmd FileType python set commentstring=#%s
+
+        " PHP Autocomplete
+        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+        set ofu=syntaxcomplete#Complete
+
+
+        " Note, perl automatically sets foldmethod in the syntax file
+        autocmd Syntax c,cpp,vim,xml,html,xhtml,php,py setlocal foldmethod=syntax
+        autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
+    " }
+
+    " You might also find this useful
+    " PHP Generated Code Highlights (HTML & SQL)                                              
+    let php_sql_query=1                                                                                        
+    let php_htmlInStrings=1
+    let php_folding=2
+
+
+    let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
+    let Tlist_Show_One_File = 1       " Only show tags for current buffer
+    let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
+    let tlist_sql_settings = 'sql;P:package;t:table'
+    let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
+
+    " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+    autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
+
 " }
 
