@@ -394,11 +394,13 @@
     " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
     nnoremap ; :
 
+    " Copy to clipboard
+    vmap <C-C> "+ygv"zy`>
+    
     " Easier moving in tabs and windows
-    map <C-J> <C-W>j<C-W>_
-    map <C-K> <C-W>k<C-W>_
-    "map <C-L> <C-W>l<C-W>_
-    map <C-H> <C-W>h<C-W>_
+    " only j and k are enough for me
+    map <C-S-J> <C-W>j<C-W>_
+    map <C-S-K> <C-W>k<C-W>_
 
     " Tabs {
         " tab navigation like firefox
@@ -421,8 +423,10 @@
     "vnoremap <Tab> >
     "vnoremap <S-Tab> <lt>
 
-    noremap <c-]> g<c-]>
-    noremap <c-g> g<c-g>
+    " Disabled because c-] is for tag definition
+    " and c-g is for showing information in the command line, yes I use it.
+    "noremap <c-]> g<c-]>
+    "noremap <c-g> g<c-g>
 
     " These mappings are useful in long wrapped lines when pressing <down> or <up>
     " Use j or k to get the default behavior.
