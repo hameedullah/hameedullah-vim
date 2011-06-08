@@ -22,6 +22,9 @@
 [submodule ".vim/bundle/lusty"]
 	path = .vim/bundle/lusty
 	url = https://github.com/sjbach/lusty
+[submodule ".vim/bundle/checksyntax_vim"]
+	path = .vim/bundle/checksyntax_vim
+	url = https://github.com/tomtom/checksyntax_vim
 [submodule ".vim/bundle/command-t"]
 	path = .vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
