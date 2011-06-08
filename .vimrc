@@ -602,6 +602,7 @@
         map <F9> :DbgRefreshWatch<CR>
         map <S-F9> :DbgAddWatch<CR>
     " }
+    
     " Lusty Eplorer and Juggler {
         " Lusty Explorer default key mappings
         ":LustyFilesystemExplorer 
@@ -642,6 +643,15 @@
 
         "If you want to switch to that buffer, press "f" or "4" again or press "<ENTER>".  Alternatively, press one of the other mapped keys to highlight another buffer. 
     " }
+    
+    " PHP Doc Plugin {
+        " PHP doc key mappings
+        inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
+        nnoremap <C-P> :call PhpDocSingle()<CR> 
+        vnoremap <C-P> :call PhpDocRange()<CR>
+
+    " }
+    
     " Tasklist {
         " A todo reminder plugin that lists all your TODO, FIXME in current file:
         " http://www.vim.org/scripts/script.php?script_id=2607
@@ -652,6 +662,7 @@
         let g:tlWindowPosition=1
 
     " }
+    
     " Taglist {
         " Taken from spf-13
         let Tlist_Auto_Highlight_Tag = 1
