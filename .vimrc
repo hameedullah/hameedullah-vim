@@ -604,6 +604,9 @@
     " }
     
     " Lusty Eplorer and Juggler {
+        " disable lusty juggler for timebeing, as it is breaking delimitMate
+        let g:loaded_lustyjuggler = "yep"
+
         " Lusty Explorer default key mappings
         ":LustyFilesystemExplorer 
         ":LustyFilesystemExplorerFromHere 
