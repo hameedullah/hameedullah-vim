@@ -687,11 +687,12 @@
         let separator = "."
         let parent = $HOME
         let prefix = '.vim'
-        let dir_list = { 'backup': 'backupdir', 'views': 'viewdir', 'swap': 'directory' }
+        " Added slash at the end of swap directory name 'read :h directory' okay
+        let dir_list = { 'backup': 'backupdir', 'views': 'viewdir', 'swap/': 'directory' }
 
         for [dirname, settingname] in items(dir_list)
             " Create backup, views and swap folders inside .vim
-            " I don't like clusttering my homedirectory
+            " I don't like cluttering my homedirectory
             let directory = parent . '/' . prefix . '/' . dirname . "/"
             if exists("*mkdir")
                 if !isdirectory(directory)
