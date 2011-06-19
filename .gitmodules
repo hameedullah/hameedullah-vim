@@ -40,12 +40,12 @@
 [submodule ".vim/bundle/vim-fugitive"]
 	path = .vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule ".vim/bundle/snipmate-snippets"]
-	path = .vim/bundle/snipmate-snippets
-	url = git://github.com/spf13/snipmate-snippets.git
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = http://github.com/tpope/vim-surround
 [submodule ".vim/bundle/vim-ragtag"]
 	path = .vim/bundle/vim-ragtag
 	url = git://github.com/tpope/vim-ragtag.git
+[submodule ".vim/bundle/pydoc.vim"]
+	path = .vim/bundle/pydoc.vim
+	url = git://github.com/fs111/pydoc.vim.git
