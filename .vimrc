@@ -412,8 +412,6 @@
         map <C-right> :tabn<CR>
         imap <C-left>   <Esc>:tabp<CR>
         imap <C-right>  <Esc>:tabn<CR>
-        nmap <C-t> :tabnew<CR>
-        imap <C-t> <Esc>:tabnew<CR>"
     " }
 
     " This mapping allows to stay in visual mode when indenting with < and >
