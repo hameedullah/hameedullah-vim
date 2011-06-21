@@ -355,6 +355,24 @@
 
 " }
 
+" Tags {
+    " Taken from spf-13
+    " Search tags file in current directory and the upward to root till one is
+    " found
+    set tags=./tags;/,$HOME/vimtags
+
+    " Tag Setup
+    " Still needs to be done
+    " TODO: Write a vim plugin that will run the ctags on current file and update the tags file in current
+    "       directory
+    " TODO: A key mapping to manually update the tags file in current directory
+    " TODO: A shell script to run ctags and create project wide tags file
+    " TODO: The shell could also delete sub tags file
+    " A master tag file will be in project's root directory.
+    " So the new tags will be instantly available in our local per-directory
+    " tags file.
+" }
+
 " Indentation {
     " Global Indentation Settings {
         " Indentation settings for using 2 spaces instead of tabs.
