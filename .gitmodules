@@ -54,4 +54,4 @@
 	url = git@github.com:hameedullah/snipmate-snippets.git
 [submodule ".vim/bundle/Pydiction"]
 	path = .vim/bundle/Pydiction
-	url = git@github.com:hameedullah/Pydiction.git
+	url = http://github.com/hameedullah/Pydiction
