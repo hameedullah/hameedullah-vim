@@ -322,6 +322,10 @@
         let vimsyn_folding='af'       " Vim script
         let xml_syntax_folding=1      " XML
     " }
+    " VimDiff {
+        " Ignore white space and look for actual changes only
+        set diffopt+=iwhite
+    " }
 " }
 
 " Vim User Interface {
@@ -676,7 +680,7 @@
         " http://www.vim.org/scripts/script.php?script_id=2607
 
         "<Leader>t
-        map <leader>ta <Plug>TaskList
+        map <leader>v <Plug>TaskList
 
         let g:tlWindowPosition=1
 
