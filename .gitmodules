@@ -57,4 +57,4 @@
 	url = http://github.com/hameedullah/snipmate-snippets
 [submodule ".vim/bundle/vcscommand"]
 	path = .vim/bundle/vcscommand
-	url = git://github.com/hameedullah/vcscommand.vim.git
+	url = https://hameedullah@github.com/hameedullah/vcscommand.vim.git
