@@ -1,5 +1,5 @@
 " Modeline, Author and Notes {
-" vim: set foldmarker={,} foldlevel=0 foldmethod=marker spell:
+" vim: set foldmarker={,} foldlevel=0 foldmethod=marker:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ~/.vimrc                                                      "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
