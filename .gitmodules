@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/vcscommand"]
 	path = .vim/bundle/vcscommand
 	url = https://hameedullah@github.com/hameedullah/vcscommand.vim.git
+[submodule ".vim/bundle/PDV-phpDocumentor-for-Vim"]
+	path = .vim/bundle/PDV-phpDocumentor-for-Vim
+	url = git://github.com/hameedullah/PDV--phpDocumentor-for-Vim.git
