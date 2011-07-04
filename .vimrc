@@ -667,11 +667,27 @@
         "If you want to switch to that buffer, press "f" or "4" again or press "<ENTER>".  Alternatively, press one of the other mapped keys to highlight another buffer. 
     " }
     
-    " PHP Doc Plugin {
+    " PDV phpDocumentor for Vim Plugin {
         " PHP doc key mappings
         inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
         nnoremap <C-P> :call PhpDocSingle()<CR> 
         vnoremap <C-P> :call PhpDocRange()<CR>
+
+        " Default Variable Values
+        " The author details
+        let g:pdv_cfg_Author = "Hameedullah Khan <h@hameedullah.com>"
+        " The copy right statement
+        let g:pdv_cfg_Copyright = "Copyright 2011 Hameedullah Khan"
+        " The licence
+        let g:pdv_cfg_License = "GNU General Public License http://www.gnu.org/licenses/gpl.txt"
+
+        """"""""""""""""""""""""""""""""""""""""""""""""""""
+        " Normally the below are not needed to be modified
+        " TODO: add description of the variables, to explain their function
+        let g:pdv_cfg_Type = "mixed"
+        let g:pdv_cfg_Package = ""
+        let g:pdv_cfg_Version = "$id$"
+        let g:pdv_cfg_ReturnVal = "void"
 
     " }
     
