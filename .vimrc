@@ -411,7 +411,7 @@
         autocmd FileType python setlocal tabstop=8 
         autocmd FileType python setlocal shiftwidth=4 
         autocmd FileType python setlocal softtabstop=4
-        autocmd Filetype python setlocal textwidth=79
+        autocmd FileType python setlocal textwidth=79
 
     " }
 
@@ -524,32 +524,62 @@
     " This causes vim to hang for 5-6 seconds when writing some files
     " shold map it to some key, that will be more useful
     " autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    " Source .vimrc when I write it.  The nested keyword allows
+    " autocommand ColorScheme to fire when sourcing ~/.vimrc.
+    autocmd! BufWritePost .vimrc nested source %
 
-    " Auto Complete For Python {
+    " Automatic commands. {
+
+        " If swapfile exists assume 'e' as the response i.e edit anyway
+        autocmd SwapExists * let v:swapchoice = 'e'
+
+        autocmd BufReadPost */etc/* setlocal textwidth=0
+        autocmd BufReadPost */var/log/* setlocal ft=messages
+        autocmd BufReadPost ~/.vim-plugin-tool.conf setl ft=dosini nospell
+
+        " Automatically sort word lists and generate spell files.
+        autocmd BufWritePre */spell/*.add %sort i
+        autocmd BufWritePost */spell/*.add silent mkspell! %
+
+
+        " Note, perl automatically sets foldmethod in the syntax file
+        autocmd Syntax c,cpp,vim,xml,html,xhtml,php setlocal foldmethod=syntax
+        autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
+    " }
+
+    " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+    autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
+
+    " Auto Commands For Python {
         " Enable omni-completion in Python scripts.
         autocmd FileType python set omnifunc=pythoncomplete#Complete
-    " }
-
-    " Auto Complete For PHP {
-        " PHP Autocomplete
-        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-    " }
-
-        autocmd FileType messages setlocal nowrap nomodifiable nospell
-        autocmd FileType c setlocal cms=/*%s*/
-        autocmd FileType gitcommit setlocal autoindent
-        autocmd FileType sh setlocal isfname-==
-        autocmd FileType sh,php setlocal textwidth=0
-
-        " Enable completion dictionaries for PHP and Python buffers.
-        "autocmd FileType python set complete+=k~/.vim/dict/python " isk+=.,(
-        autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
 
         " Hide # comment markers from folded text in Python scripts.
         autocmd FileType python set commentstring=#%s
 
         " Set fold method in python scripts to be indent based
         autocmd FileType python setlocal foldmethod=indent
+
+    " }
+
+    " Auto Commands for PHP Files {
+        " PHP Autocomplete
+        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+        " run file with PHP CLI (CTRL-M)
+        autocmd! FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
+
+        " Enable completion dictionaries for PHP and Python buffers.
+        "autocmd FileType python set complete+=k~/.vim/dict/python " isk+=.,(
+        autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
+
+    " }
+
+    autocmd FileType messages setlocal nowrap nomodifiable nospell
+    autocmd FileType c setlocal cms=/*%s*/
+    autocmd FileType gitcommit setlocal autoindent
+    autocmd FileType sh setlocal isfname-==
+    autocmd FileType sh,php setlocal textwidth=0
 
 " }
 
@@ -774,10 +804,6 @@
 " }
 
 " Other Not Aligned Options {
-    if has('autocmd')
-    " Source .vimrc when I write it.  The nested keyword allows
-    " autocommand ColorScheme to fire when sourcing ~/.vimrc.
-    au! BufWritePost .vimrc nested source %
 
     " Change color of cursor in terminal:
     " - red in normal mode.
@@ -808,7 +834,6 @@
     "    au BufWritePost *.dat set nomod  | endif
     "augroup END
 
-    endif
 
     """ Test these options and then enable only that suite my style.
     "set completeopt=menu
@@ -840,9 +865,6 @@
     "##       PHP             ##
     "###########################
 
-    " run file with PHP CLI (CTRL-M)
-    :autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
-
     " Session.vim settings
     ":let g:session_autosave = 1
     ":let g:session_autoload = 1
@@ -865,36 +887,6 @@
     set ssop-=buffers
 
 
-
-    " Automatic commands. {
-
-        " If swapfile exists assume 'e' as the response i.e edit anyway
-        autocmd SwapExists * let v:swapchoice = 'e'
-
-        autocmd BufReadPost */etc/* setlocal textwidth=0
-        autocmd BufReadPost */var/log/* setlocal ft=messages
-        autocmd BufReadPost ~/.vim-plugin-tool.conf setl ft=dosini nospell
-
-        " Automatically sort word lists and generate spell files.
-        autocmd BufWritePre */spell/*.add %sort i
-        autocmd BufWritePost */spell/*.add silent mkspell! %
-
-
-        " Note, perl automatically sets foldmethod in the syntax file
-        autocmd Syntax c,cpp,vim,xml,html,xhtml,php setlocal foldmethod=syntax
-        autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
-    " }
-
-    " You might also find this useful
-    " PHP Generated Code Highlights (HTML & SQL)                                              
-    let php_sql_query=1                                                                                        
-    let php_htmlInStrings=1
-    let php_folding=2
-
-
-
-    " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-    autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
 
 " }
 
