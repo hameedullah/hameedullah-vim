@@ -406,7 +406,13 @@
     " }
 
     " Python Indentation {
-        au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+        " PEP8 Coding Standard baby - http://www.python.org/dev/peps/pep-0008/
+        autocmd FileType python setlocal expandtab 
+        autocmd FileType python setlocal tabstop=8 
+        autocmd FileType python setlocal shiftwidth=4 
+        autocmd FileType python setlocal softtabstop=4
+        autocmd Filetype python setlocal textwidth=79
+
     " }
 
 " }
