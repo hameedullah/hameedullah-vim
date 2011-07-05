@@ -379,7 +379,7 @@
 
 " Indentation {
     " Global Indentation Settings {
-        " Indentation settings for using 2 spaces instead of tabs.
+        " Indentation settings for using 4 spaces instead of tabs.
         " Do not change 'tabstop' from its default value of 8 with this setup.
         set shiftwidth=4
         set softtabstop=4
@@ -393,6 +393,20 @@
         " two characters wide.
         "set shiftwidth=2
         "set tabstop=2
+    " }
+
+    " PHP Indentation {
+        " Wordpress Coding Standard baby. ;)
+
+        " Don't expand tabs in php files
+        autocmd FileType php setlocal noexpandtab
+
+        " Tab size is 4 chars, this is used for diplay purposes only
+        autocmd FileType php setlocal tabstop=4
+    " }
+
+    " Python Indentation {
+        au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
     " }
 
 " }
@@ -487,37 +501,13 @@
 " }
 
 " Auto Complete {
-        " OmniComplete {
-            " Taken form spf13"
-            "if has("autocmd") && exists("+omnifunc")
-                    "autocmd Filetype *
-                            "\if &omnifunc == "" |
-                            "\setlocal omnifunc=syntaxcomplete#Complete |
-                            "\endif
-            "endif
-
-            " some convenient mappings 
-            "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-            "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-            "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-            "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-            "inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-            "inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-            " and make sure that it doesn't break supertab
+        " Supertab Auto complete {
+            " Taken from spf-13
+            " make sure that omni completion doesn't break supertab
             let g:SuperTabCrMapping = 0
+        " }
 
-            " automatically open and close the popup menu / preview window
-            "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-            "set completeopt=menu,preview,longest
-        " }
-        " Python Auto Complete {
-            autocmd FileType python set omnifunc=pythoncomplete#Complete
-        
-            " instead of hardcoding path, this config var is moved to plugin
-            " directory under pythondiction bundle, its now set on runtime"
-            "let g:pydiction_location = '/path/to/complete-dict'
-        " }
+        set ofu=syntaxcomplete#Complete
 " }
 
 " FileType Commands and Settings {
@@ -529,6 +519,31 @@
     " shold map it to some key, that will be more useful
     " autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
+    " Auto Complete For Python {
+        " Enable omni-completion in Python scripts.
+        autocmd FileType python set omnifunc=pythoncomplete#Complete
+    " }
+
+    " Auto Complete For PHP {
+        " PHP Autocomplete
+        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+    " }
+
+        autocmd FileType messages setlocal nowrap nomodifiable nospell
+        autocmd FileType c setlocal cms=/*%s*/
+        autocmd FileType gitcommit setlocal autoindent
+        autocmd FileType sh setlocal isfname-==
+        autocmd FileType sh,php setlocal textwidth=0
+
+        " Enable completion dictionaries for PHP and Python buffers.
+        "autocmd FileType python set complete+=k~/.vim/dict/python " isk+=.,(
+        autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
+
+        " Hide # comment markers from folded text in Python scripts.
+        autocmd FileType python set commentstring=#%s
+
+        " Set fold method in python scripts to be indent based
+        autocmd FileType python setlocal foldmethod=indent
 
 " }
 
@@ -669,9 +684,9 @@
     
     " PDV phpDocumentor for Vim Plugin {
         " PHP doc key mappings
-        inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
-        nnoremap <C-P> :call PhpDocSingle()<CR> 
-        vnoremap <C-P> :call PhpDocRange()<CR>
+        inoremap <C-p> <ESC>:call PhpDocSingle()<CR>i 
+        nnoremap <C-p> :call PhpDocSingle()<CR> 
+        vnoremap <C-p> :call PhpDocRange()<CR>
 
         " Default Variable Values
         " The author details
@@ -695,7 +710,7 @@
         " A todo reminder plugin that lists all your TODO, FIXME in current file:
         " http://www.vim.org/scripts/script.php?script_id=2607
 
-        "<Leader>t
+        "<Leader>v
         map <leader>v <Plug>TaskList
 
         let g:tlWindowPosition=1
@@ -706,15 +721,19 @@
         " Taken from spf-13
         let Tlist_Auto_Highlight_Tag = 1
         let Tlist_Auto_Update = 1
-        let Tlist_Exit_OnlyWindow = 1
+        let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
         let Tlist_File_Fold_Auto_Close = 1
         let Tlist_Highlight_Tag_On_BufEnter = 1
         let Tlist_Use_Right_Window = 1
         let Tlist_Use_SingleClick = 1
+        let Tlist_Show_One_File = 1       " Only show tags for current buffer
+        let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
 
         let g:ctags_statusline=1
         " Override how taglist does javascript
         let g:tlist_javascript_settings = 'javascript;f:function;c:class;m:method;p:property;v:global'
+
+        let g:tlist_sql_settings = 'sql;P:package;t:table'
     " }
 " }
 
@@ -818,9 +837,6 @@
     " run file with PHP CLI (CTRL-M)
     :autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
 
-    " PHP parser check (CTRL-L)
-    ":autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
-
     " Session.vim settings
     ":let g:session_autosave = 1
     ":let g:session_autoload = 1
@@ -846,38 +862,20 @@
 
     " Automatic commands. {
 
-        autocmd FileType c setlocal cms=/*%s*/
-        autocmd FileType gitcommit setlocal autoindent
-        autocmd FileType sh setlocal isfname-==
-        autocmd FileType sh,php setlocal textwidth=0
+        " If swapfile exists assume 'e' as the response i.e edit anyway
+        autocmd SwapExists * let v:swapchoice = 'e'
+
         autocmd BufReadPost */etc/* setlocal textwidth=0
         autocmd BufReadPost */var/log/* setlocal ft=messages
-        autocmd FileType messages setlocal nowrap nomodifiable nospell
-        autocmd SwapExists * let v:swapchoice = 'e'
         autocmd BufReadPost ~/.vim-plugin-tool.conf setl ft=dosini nospell
 
         " Automatically sort word lists and generate spell files.
         autocmd BufWritePre */spell/*.add %sort i
         autocmd BufWritePost */spell/*.add silent mkspell! %
 
-        " Enable completion dictionaries for PHP and Python buffers.
-        "autocmd FileType python set complete+=k~/.vim/dict/python " isk+=.,(
-        autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
-        "autocmd FileType lua set complete+=k~/.vim/dict/lua
-
-        " Enable omni-completion in Python scripts.
-        autocmd FileType python set omnifunc=pythoncomplete#Complete
-
-        " Hide # comment markers from folded text in Python scripts.
-        autocmd FileType python set commentstring=#%s
-
-        " PHP Autocomplete
-        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-        set ofu=syntaxcomplete#Complete
-
 
         " Note, perl automatically sets foldmethod in the syntax file
-        autocmd Syntax c,cpp,vim,xml,html,xhtml,php,py setlocal foldmethod=syntax
+        autocmd Syntax c,cpp,vim,xml,html,xhtml,php setlocal foldmethod=syntax
         autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
     " }
 
@@ -888,11 +886,6 @@
     let php_folding=2
 
 
-    let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
-    let Tlist_Show_One_File = 1       " Only show tags for current buffer
-    let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
-    let tlist_sql_settings = 'sql;P:package;t:table'
-    let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
 
     " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
     autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
