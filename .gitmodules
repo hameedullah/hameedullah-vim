@@ -61,3 +61,9 @@
 [submodule ".vim/bundle/PDV-phpDocumentor-for-Vim"]
 	path = .vim/bundle/PDV-phpDocumentor-for-Vim
 	url = git://github.com/hameedullah/PDV--phpDocumentor-for-Vim.git
+[submodule ".vim/bundle/matchit"]
+	path = .vim/bundle/matchit
+	url = git://github.com/vim-scripts/matchit.zip.git
+[submodule ".vim/bundle/bufexplorer"]
+	path = .vim/bundle/bufexplorer
+	url = git://github.com/vim-scripts/bufexplorer.zip.git
