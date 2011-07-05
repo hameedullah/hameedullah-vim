@@ -73,3 +73,6 @@
 [submodule ".vim/bundle/grep"]
 	path = .vim/bundle/grep
 	url = git://github.com/vim-scripts/grep.vim.git
+[submodule ".vim/bundle/mru"]
+	path = .vim/bundle/mru
+	url = git://github.com/vim-scripts/mru.vim.git
