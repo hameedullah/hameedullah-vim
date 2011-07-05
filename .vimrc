@@ -599,9 +599,11 @@
 
 
     " SnipMate {
+        " Taken from spf-13
         " Setting the author var
         " If forking, please overwrite in your .vimrc.local file
         let g:snips_author = 'Hameedullah Khan <h@hameedullah.com>'
+
         " Shortcut for reloading snippets, useful when developing
         nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
     " }
@@ -834,22 +836,6 @@
     "    au BufWritePost *.dat set nomod  | endif
     "augroup END
 
-
-    """ Test these options and then enable only that suite my style.
-    "set completeopt=menu
-    "set display=lastline showbreak=>>>\
-    "set ignorecase smartcase infercase
-    "set incsearch
-    "set linebreak nojoinspaces
-    "set modeline
-    "set path=.,~/.vim/** suffixesadd=.vim
-    "set ruler
-    "set tabpagemax=25
-    "set tabstop=2 shiftwidth=2
-    "set tags=./.tags;
-
-    " Don't remember source of this, i think it was already in my .vimrc
-
     " omnicomplete from: http://vim.wikia.com/wiki/VimTip1386
     "set completeopt=longest,menuone
     "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -860,10 +846,6 @@
     "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : "  
     "    \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-
-    "###########################
-    "##       PHP             ##
-    "###########################
 
     " Session.vim settings
     ":let g:session_autosave = 1
