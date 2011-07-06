@@ -397,19 +397,15 @@
 
     " PHP Indentation {
         " Wordpress Coding Standard baby. ;)
-
-        " Don't expand tabs in php files
-        autocmd FileType php setlocal noexpandtab
-
-        " Tab size is 4 chars, this is used for diplay purposes only
         autocmd FileType php setlocal tabstop=4
+        autocmd FileType php setlocal noexpandtab
     " }
 
     " Python Indentation {
         " PEP8 Coding Standard baby - http://www.python.org/dev/peps/pep-0008/
-        autocmd FileType python setlocal expandtab 
         autocmd FileType python setlocal tabstop=8 
-        autocmd FileType python setlocal shiftwidth=4 
+        autocmd FileType python setlocal expandtab
+        autocmd FileType python setlocal shiftwidth=4
         autocmd FileType python setlocal softtabstop=4
         autocmd FileType python setlocal textwidth=79
 
@@ -552,10 +548,10 @@
 
     " Auto Commands For Python {
         " Enable omni-completion in Python scripts.
-        autocmd FileType python set omnifunc=pythoncomplete#Complete
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
         " Hide # comment markers from folded text in Python scripts.
-        autocmd FileType python set commentstring=#%s
+        autocmd FileType python setlocal commentstring=#%s
 
         " Set fold method in python scripts to be indent based
         autocmd FileType python setlocal foldmethod=indent
@@ -564,22 +560,22 @@
 
     " Auto Commands for PHP Files {
         " PHP Autocomplete
-        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+        autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
-        " run file with PHP CLI (CTRL-M)
-        autocmd! FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
+        autocmd FileType php setlocal textwidth=0
 
         " Enable completion dictionaries for PHP and Python buffers.
-        "autocmd FileType python set complete+=k~/.vim/dict/python " isk+=.,(
-        autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
+        autocmd FileType php setlocal complete+=k~/.vim/dict/PHP.dict
 
+        " run file with PHP CLI (CTRL-M)
+        autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
     " }
 
     autocmd FileType messages setlocal nowrap nomodifiable nospell
     autocmd FileType c setlocal cms=/*%s*/
     autocmd FileType gitcommit setlocal autoindent
     autocmd FileType sh setlocal isfname-==
-    autocmd FileType sh,php setlocal textwidth=0
+    autocmd FileType sh setlocal textwidth=0
 
 " }
 
