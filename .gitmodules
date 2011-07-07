@@ -61,3 +61,18 @@
 [submodule ".vim/bundle/PDV-phpDocumentor-for-Vim"]
 	path = .vim/bundle/PDV-phpDocumentor-for-Vim
 	url = git://github.com/hameedullah/PDV--phpDocumentor-for-Vim.git
+[submodule ".vim/bundle/matchit"]
+	path = .vim/bundle/matchit
+	url = git://github.com/vim-scripts/matchit.zip.git
+[submodule ".vim/bundle/bufexplorer"]
+	path = .vim/bundle/bufexplorer
+	url = git://github.com/vim-scripts/bufexplorer.zip.git
+[submodule ".vim/bundle/closetags"]
+	path = .vim/bundle/closetags
+	url = git://github.com/vim-scripts/closetag.vim.git
+[submodule ".vim/bundle/grep"]
+	path = .vim/bundle/grep
+	url = git://github.com/vim-scripts/grep.vim.git
+[submodule ".vim/bundle/mru"]
+	path = .vim/bundle/mru
+	url = git://github.com/vim-scripts/mru.vim.git
