@@ -135,6 +135,19 @@
         set showcmd
     " }
 
+    " Colors & Themes {
+        " Pump up the Vim
+        " Currenly using Mustang theme
+        " TODO: Add other themes and theming support with out modifying .vimrc
+        set background=dark
+
+        if $COLORTERM == 'gnome-terminal' 
+            set term=gnome-256color 
+            colorscheme Mustang 
+        else 
+            colorscheme zenesque 
+        endif 
+    " }
 
 " }
 
