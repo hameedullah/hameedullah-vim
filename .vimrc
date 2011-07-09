@@ -6,7 +6,7 @@
 " Author: Hameedullah Khan                                      "
 " Email: h@hameedullah.com                                      "
 "                                                               "
-" Version: 0.2                                                  "
+" Version: 0.3                                                  "
 "                                                               "
 " Sources: Help taken from many sources and other vim hackers.  "
 "          All the sources are specified with the vim tip/trick "
