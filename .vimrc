@@ -853,14 +853,6 @@
     set complete+=kspell
 
 
-    " Taken from http://peterodding.com/code/vim/profile/vimrc
-    " Make Vim open and close folded text as needed because I can't be bothered to
-    " do so myself and wouldn't use text folding at all if it wasn't automatic.
-    " set foldmethod=marker foldopen=all,insert foldclose=all
-    " Folding
-    set foldlevel=0
-    set foldopen=all,insert foldclose=all
-
     " to reduce the number of buffers while using sessions
     set ssop-=buffers
 
