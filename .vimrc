@@ -145,7 +145,7 @@
             set term=gnome-256color 
             colorscheme Mustang 
         else 
-            colorscheme zenesque 
+            colorscheme default
         endif 
     " }
 
