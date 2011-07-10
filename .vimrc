@@ -143,7 +143,7 @@
 
         if $COLORTERM == 'gnome-terminal' 
             set term=gnome-256color 
-            colorscheme Mustang 
+            colorscheme Mustang
         else 
             colorscheme default
         endif 
