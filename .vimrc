@@ -282,14 +282,27 @@
             endfunction
 
 
-            " This status line mod takne from spf-13
+            " This status line mod taken from spf-13
             " Broken down into easily includeable segments
-            set statusline=%<%f\ " Filename
+            set statusline=%n                             " buffer number
+            set statusline+=%{'/'.bufnr('$')}\             " buffer count
+            set statusline+=%<%f\ " Filename
             set statusline+=%w%h%m%r " Options
-            "set statusline+=%{fugitive#statusline()} " Git Hotness
+            set statusline+=%{fugitive#statusline()} " Git Hotness
             set statusline+=\ [%{&ff}/%Y] " filetype
             set statusline+=\ [%{getcwd()}] " current dir
-            "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+            set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+
+            " This taken from the below status line mod
+            set statusline+=%#User1#                       " highlighting
+            set statusline+=%h%m%r%w\                      " flags
+            set statusline+=%{(&key==\"\"?\"\":\"encr,\")} " encrypted?
+            set statusline+=%{(&fenc==\"\"?&enc:&fenc)},   " encoding
+            set statusline+=%{((exists(\"+bomb\")\ &&\ &bomb)?\"B,\":\"\")} " BOM
+            set statusline+=%{&fileformat},                " file format
+            set statusline+=%{&spelllang},                 " spell language
+            set statusline+=%{SyntaxItem()}                " syntax group under cursor
+
             set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 
             " Fancy status line., taken fomr: http://dominique.pelle.free.fr/.vimrc.html
