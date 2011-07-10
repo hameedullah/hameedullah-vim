@@ -295,7 +295,6 @@
 
             " This taken from the below status line mod
             set statusline+=%#User1#                       " highlighting
-            set statusline+=%h%m%r%w\                      " flags
             set statusline+=%{(&key==\"\"?\"\":\"encr,\")} " encrypted?
             set statusline+=%{(&fenc==\"\"?&enc:&fenc)},   " encoding
             set statusline+=%{((exists(\"+bomb\")\ &&\ &bomb)?\"B,\":\"\")} " BOM
