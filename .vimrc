@@ -264,7 +264,11 @@
 
             " Function used to display syntax group.
             function! SyntaxItem()
-                return synIDattr(synID(line("."),col("."),1),"name")
+                let syntaxitem = synIDattr(synID(line("."),col("."),1),"name")
+                if syntaxitem != ""
+                    let syntaxitem = " [" . syntaxitem . "]"
+                endif
+                return syntaxitem
             endfunction
 
             " Function used to display utf-8 sequence.
@@ -289,17 +293,21 @@
             set statusline+=%<%f\ " Filename
             set statusline+=%w%h%m%r " Options
             set statusline+=%{fugitive#statusline()} " Git Hotness
-            set statusline+=\ [%{&ff}/%Y] " filetype
+
+            " This taken from the below status line mod
+            " modified by me.
+            " File type information
+            set statusline+=%#User1#                       " highlighting
+            set statusline+=\ [%{&ff}/%Y " start filetype information
+            set statusline+=%{(&key==\"\"?\"\":\"/encr\")} " encrypted?
+            set statusline+=/%{(&fenc==\"\"?&enc:&fenc)}   " encoding
+            set statusline+=%{((exists(\"+bomb\")\ &&\ &bomb)?\"/B\":\"\")} " BOM
+            set statusline+=\] " close filetype information
+
             set statusline+=\ [%{getcwd()}] " current dir
             set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
 
             " This taken from the below status line mod
-            set statusline+=%#User1#                       " highlighting
-            set statusline+=%{(&key==\"\"?\"\":\"encr,\")} " encrypted?
-            set statusline+=%{(&fenc==\"\"?&enc:&fenc)},   " encoding
-            set statusline+=%{((exists(\"+bomb\")\ &&\ &bomb)?\"B,\":\"\")} " BOM
-            set statusline+=%{&fileformat},                " file format
-            set statusline+=%{&spelllang},                 " spell language
             set statusline+=%{SyntaxItem()}                " syntax group under cursor
 
             set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
