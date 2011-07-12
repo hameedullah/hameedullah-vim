@@ -79,3 +79,6 @@
 [submodule ".vim/bundle/taglist"]
 	path = .vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
+[submodule ".vim/bundle/vim-repeat"]
+	path = .vim/bundle/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
