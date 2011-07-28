@@ -432,6 +432,8 @@
         " Wordpress Coding Standard baby. ;)
         autocmd FileType php setlocal tabstop=4
         autocmd FileType php setlocal noexpandtab
+        autocmd FileType php setlocal autoindent
+        autocmd FileType php setlocal smartindent
     " }
 
     " Python Indentation {
