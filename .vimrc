@@ -670,14 +670,24 @@
         cmap BE BufExplorer
     " }
 
-    " VCS commands {
-        nmap <leader>vs :VCSStatus<CR>
-        nmap <leader>vc :VCSCommit<CR>
+    " VCS Custom Mappings {
         nmap <leader>vb :VCSBlame<CR>
-        nmap <leader>va :VCSAdd<CR>
-        nmap <leader>vd :VCSVimDiff<CR>
-        nmap <leader>vl :VCSLog<CR>
-        nmap <leader>vu :VCSUpdate<CR>
+        nmap <leader>va <Plug>VCSAdd
+        nmap <leader>vn <Plug>VCSAnnotate
+        nmap <leader>vN <Plug>VCSAnnotate!
+        nmap <leader>vc <Plug>VCSCommit
+        nmap <leader>vD <Plug>VCSDelete
+        nmap <leader>vd <Plug>VCSDiff
+        nmap <leader>vg <Plug>VCSGotoOriginal
+        nmap <leader>vG <Plug>VCSGotoOriginal!
+        nmap <leader>vi <Plug>VCSInfo
+        nmap <leader>vl <Plug>VCSLog
+        nmap <leader>vL <Plug>VCSLock
+        nmap <leader>vr <Plug>VCSReview
+        nmap <leader>vs <Plug>VCSStatus
+        nmap <leader>vu <Plug>VCSUpdate
+        nmap <leader>vU <Plug>VCSUnlock
+        nmap <leader>vv <Plug>VCSVimDiff
     " }
 
     " VimDebugger {
