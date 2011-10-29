@@ -55,9 +55,6 @@
 [submodule ".vim/bundle/snipmate-snippets"]
 	path = .vim/bundle/snipmate-snippets
 	url = http://github.com/hameedullah/snipmate-snippets
-[submodule ".vim/bundle/vcscommand"]
-	path = .vim/bundle/vcscommand
-	url = https://hameedullah@github.com/hameedullah/vcscommand.vim.git
 [submodule ".vim/bundle/PDV-phpDocumentor-for-Vim"]
 	path = .vim/bundle/PDV-phpDocumentor-for-Vim
 	url = git://github.com/hameedullah/PDV--phpDocumentor-for-Vim.git
@@ -82,3 +79,6 @@
 [submodule ".vim/bundle/vim-repeat"]
 	path = .vim/bundle/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
+[submodule ".vim/bundle/vcscommand"]
+	path = .vim/bundle/vcscommand
+	url = git://github.com/hameedullah/vcscommand.vim.git
