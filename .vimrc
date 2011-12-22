@@ -792,6 +792,10 @@
         "<Leader>v
         map <leader>v <Plug>TaskList
 
+        " custom token list
+        " add @todo, to parse the todo from PHPDoc Comments
+        let g:tlTokenList = ["FIXME", "TODO", "XXX", "@todo"]
+
         let g:tlWindowPosition=1
 
     " }
