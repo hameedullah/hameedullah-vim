@@ -43,9 +43,9 @@
         " Giving it a try
         " Copying spf-13
         " The next two lines ensure that the ~/.vim/bundle/ system works
-        runtime! autoload/pathogen.vim
-        silent! call pathogen#helptags()
-        silent! call pathogen#runtime_append_all_bundles()
+        runtime! bundle/vim-pathogen/autoload/pathogen.vim
+        call pathogen#infect()
+        call pathogen#helptags()
     " }
     
     " Color Scheme Loading Fix {
