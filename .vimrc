@@ -670,7 +670,11 @@
         cmap BE BufExplorer
     " }
 
-    " VCS Custom Mappings {
+    " VCSCommand Configuration {
+        " delete vcs buffer on hide
+        let VCSCommandDeleteOnHide = 1
+
+        " Custom Mappings
         nmap <leader>vb :VCSBlame<CR>
         nmap <leader>va <Plug>VCSAdd
         nmap <leader>vn <Plug>VCSAnnotate
