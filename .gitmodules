@@ -85,8 +85,8 @@
 [submodule ".vim/bundle/vcscommand"]
 	path = .vim/bundle/vcscommand
 	url = git@github.com:hameedullah/vcscommand.vim.git
-[submodule ".vim\\bundle\\ctrlp"]
-	path = .vim\\bundle\\ctrlp
+[submodule ".vim/bundle/ctrlp"]
+	path = .vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
