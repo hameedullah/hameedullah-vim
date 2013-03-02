@@ -709,7 +709,7 @@
     " Buffer explorer {
         " Disable BufExplorer
         " To enable BufExploere comment out the very next line.
-        let g:bufexplorer_version = "7.2.8"
+        "let g:bufexplorer_version = "7.2.8"
 
         " TODO: Get used to a mapping
         "  Currently the leader based mapping seems very slow
