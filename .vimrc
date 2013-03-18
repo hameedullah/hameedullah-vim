@@ -117,7 +117,7 @@
         set ignorecase
         set smartcase
     " }
-    "
+    
     " Security {
         " Autowrite unsaved buffers
         " Alternatives include using tabs or split windows instead of re-using the same
@@ -600,8 +600,10 @@
         autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
     " }
 
+    "TODO: disabled this autocmd because not working on windows"
     " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-    autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
+    "autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
+    set autochdir
 
     " Auto Commands For Python {
         " Enable omni-completion in Python scripts.
