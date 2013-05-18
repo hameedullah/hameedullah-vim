@@ -33,11 +33,33 @@
             set nocompatible 
 	endif
     " }
+    
+    " Windows Compatible {
+    " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+    " across (heterogeneous) systems easier.
+	if has('win32') || has('win64')
+	    set runtimepath=$HOME\.vim,$VIM\vimfiles,$VIMRUNTIME,$VIM\vimfiles\after,$HOME\.vim\after
+	endif
+    " }
+    
+  " GUI Settings {
+" GVIM- (here instead of .gvimrc)
+    if has('gui_running')
+        set guioptions-=T " remove the toolbar
+        set lines=40 " 40 lines of text instead of 24,
+        "set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
+        if has('gui_macvim')
+            set transparency=5 " Make the window slightly transparent
+        endif
+    else
+"set term=builtin_ansi " Make arrow and other keys work
+    endif
+" }  
 
     " Modeline { "
         set modeline
     "}
-
+   
     " Pathogen {
         " This is actually the cool idea to keep plugins in their own separate folder to have a cleaner .vim-directory
         " Giving it a try
@@ -95,7 +117,7 @@
         set ignorecase
         set smartcase
     " }
-    "
+    
     " Security {
         " Autowrite unsaved buffers
         " Alternatives include using tabs or split windows instead of re-using the same
@@ -171,7 +193,7 @@
     " until somethign else is required in place of tab
     " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
     " :help listchars "
-    set listchars=eol:$,trail:Â·,nbsp:Â·
+    set listchars=eol:$,trail:·,nbsp:·
 
     " Not sure
     " TODO: read more
@@ -578,8 +600,10 @@
         autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
     " }
 
+    "TODO: disabled this autocmd because not working on windows"
     " auto change directory from: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-    autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
+    "autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | lcd %:p:h | endif
+    set autochdir
 
     " Auto Commands For Python {
         " Enable omni-completion in Python scripts.
@@ -615,7 +639,26 @@
 " }
 
 " Plugins Specific Settings {
+    " CtrlP {
+        " Temporarily Ctrl+M assigned to ctrlp
+        " Ctrl+P are used for adding PHPdoc comments
+        let g:ctrlp_map = '<c-m>'
 
+        " there is no point to make it search the whole project
+        " slow and takes long time
+        let g:ctrlp_working_path_mode = 'ra'
+
+        "nmap <leader>be :CtrlPBuffer<CR>
+        nmap <leader>cp :CtrlPBuffer<CR>
+        nmap <leader>bm :CtrlPMixed<CR>
+        cmap CP CtrlP
+
+        " TODO: comapre command-t and ctrlp
+        " below line will be removed/uncommented
+        " once I do the comparison of command-to and ctrlp
+        "nmap <leader>t :CtrlP<CR>
+    " }
+    
     " Delimitmate {
         au FileType * let b:delimitMate_autoclose = 1
 
@@ -635,6 +678,8 @@
         " If forking, please overwrite in your .vimrc.local file
         let g:snips_author = 'Hameedullah Khan <h@hameedullah.com>'
 
+        " The custom snipmate directory
+        let g:snippets_dir="$HOME/.vim/bundle/snipmate-snippets/snippets"
         " Shortcut for reloading snippets, useful when developing
         nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
     " }
@@ -664,10 +709,17 @@
 
 
     " Buffer explorer {
+        " Disable BufExplorer
+        " To enable BufExploere comment out the very next line.
+        "let g:bufexplorer_version = "7.2.8"
+
         " TODO: Get used to a mapping
         "  Currently the leader based mapping seems very slow
-        nmap <leader>be :BufExplorer<CR>
-        cmap BE BufExplorer
+        if !exists("g:bufexplorer_version")
+            nmap <leader>be :BufExplorer<CR>
+            cmap BE BufExplorer
+        endif
+
     " }
 
     " VCSCommand Configuration {
@@ -724,6 +776,7 @@
     " Lusty Eplorer and Juggler {
         " disable lusty juggler for timebeing, as it is breaking delimitMate
         let g:loaded_lustyjuggler = "yep"
+        let g:LustyExplorerSuppressRubyWarning = 1
 
         " Lusty Explorer default key mappings
         ":LustyFilesystemExplorer 
@@ -794,7 +847,7 @@
         " http://www.vim.org/scripts/script.php?script_id=2607
 
         "<Leader>v
-        map <leader>v <Plug>TaskList
+        map <leader>tl <Plug>TaskList
 
         " custom token list
         " add @todo, to parse the todo from PHPDoc Comments
@@ -913,3 +966,22 @@
 
 " }
 
+" Use local vimrc if available {
+    if filereadable(expand("~/.vimrc.local"))
+        source ~/.vimrc.local
+    endif
+" }
+
+" Use local gvimrc if available and gui is running {
+    if has('gui_running')
+        if filereadable(expand("~/.gvimrc.local"))
+            source ~/.gvimrc.local
+        endif
+    endif
+" }
+"
+"
+" Unsorted Changes
+nmap <Leader>ev :tabedit $MYVIMRC<cr>
+nmap <Leader>nn :split note:new note<cr>
+nmap <Leader>ns :SearchNotes 
