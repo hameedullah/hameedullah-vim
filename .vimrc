@@ -615,6 +615,9 @@
         " Set fold method in python scripts to be indent based
         autocmd FileType python setlocal foldmethod=indent
 
+        " Set Ctrl + M to run Python script
+        autocmd FileType python noremap <C-M> :w!<CR>:!/usr/bin/env python %<CR>
+
     " }
 
     " Auto Commands for PHP Files {
