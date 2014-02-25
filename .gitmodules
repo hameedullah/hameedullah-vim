@@ -91,3 +91,6 @@
 [submodule ".vim/bundle/vim-snipmate"]
 	path = .vim/bundle/vim-snipmate
 	url = git://github.com/garbas/vim-snipmate.git
+[submodule ".vim/bundle/ctlrp"]
+	path = .vim/bundle/ctlrp
+	url = git://github.com/kien/ctrlp.vim.git
