@@ -749,6 +749,10 @@
         nmap <leader>vv <Plug>VCSVimDiff
     " }
 
+    " Ctrl {
+        let g:ctrlp_map = '<c-p>'
+    " }
+
     " VimDebugger {
         " Eclipse debugger commands
         "   F5      Step into
@@ -823,9 +827,12 @@
     
     " PDV phpDocumentor for Vim Plugin {
         " PHP doc key mappings
-        inoremap <C-p> <ESC>:call PhpDocSingle()<CR>i 
-        nnoremap <C-p> :call PhpDocSingle()<CR> 
-        vnoremap <C-p> :call PhpDocRange()<CR>
+        "inoremap <C-d> <ESC>:call PhpDocSingle()<CR>i 
+        "nnoremap <C-d> :call PhpDocSingle()<CR> 
+        "vnoremap <C-d> :call PhpDocRange()<CR>
+
+        nmap <Leader>pd :call PhpDocSingle()<CR>
+        vmap <Leader>pd :call PhpDocRange()<CR>
 
         " Default Variable Values
         " The author details
