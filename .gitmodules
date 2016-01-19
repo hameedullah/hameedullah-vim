@@ -100,3 +100,6 @@
 [submodule ".vim/bundle/puppet"]
 	path = .vim/bundle/puppet
 	url = https://github.com/rodjek/vim-puppet.git
+[submodule ".vim/bundle/nerdtree-git-plugin"]
+	path = .vim/bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
