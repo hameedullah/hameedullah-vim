@@ -33,6 +33,13 @@
             set nocompatible 
 	endif
     " }
+
+    " Cygwin {
+        if has("win32unix")
+            let g:NERDTreeShowGitStatus = 0
+        endif
+
+    " }
     
     " Windows Compatible {
     " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
