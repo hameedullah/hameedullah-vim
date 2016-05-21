@@ -169,12 +169,15 @@
         " Currenly using Mustang theme
         " TODO: Add other themes and theming support with out modifying .vimrc
         if has('gui_running')
-            set background=dark
-            colorscheme Mustang
+            "set background=dark
+            colorscheme solarized
         else
             set background=dark
-            set t_Co=256
-            colorscheme Mustang
+            colorscheme solarized
+            let g:solarized_termtrans = 1
+
+            
+
         endif
     " }
 
@@ -541,9 +544,9 @@
     imap <F3> <C-O>:set number!<CR><C-O>:set number?<CR>
     map <F4>      :set hlsearch!<CR>:set hlsearch?<CR>
     imap <F4> <C-O>:set hlsearch!<CR><C-O>:set hlsearch?<CR>
-    map <C-F5>      :set list!<CR>:set list?<CR>
-    imap <C-F5> <C-O>:set list!<CR><C-O>:set list?<CR>
-    nnoremap <silent> <C-F6> :TlistToggle<CR>
+    map <F5>      :set list!<CR>:set list?<CR>
+    imap <F5> <C-O>:set list!<CR><C-O>:set list?<CR>
+    nnoremap <silent> <F6> :TlistToggle<CR>
 
     " Useful when I am done with search
     " Map <C-L> (redraw screen) to also turn off search highlighting until the
@@ -803,17 +806,17 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
         "   Ctrl Q  Inspect
         "    Ctrl R  Run to line
         "    Ctrl U  Run snippet
-        map <F5> :DbgStepInto<CR>
-        map <S-F5> :DbgStepOut<CR>
-        map <F6> :DbgStepOver<CR>
-        map <C-F11> :DbgRun<CR> 
+        "map <F5> :DbgStepInto<CR>
+        "map <S-F5> :DbgStepOut<CR>
+        "map <F6> :DbgStepOver<CR>
+        "map <C-F11> :DbgRun<CR> 
         " TODO: Play with debug detach and map it if useful
         "map <F6> :DbgDetach<CR>
         "map <F8> :DbgToggleBreakpoint<CR>
-        map <C-S-B> :DbgToggleBreakpoint<CR>
-        map <S-F8> :DbgFlushBreakpoints<CR>
-        map <F9> :DbgRefreshWatch<CR>
-        map <S-F9> :DbgAddWatch<CR>
+        "map <C-S-B> :DbgToggleBreakpoint<CR>
+        "map <S-F8> :DbgFlushBreakpoints<CR>
+        "map <F9> :DbgRefreshWatch<CR>
+        "map <S-F9> :DbgAddWatch<CR>
     " }
     
     " Lusty Eplorer and Juggler {
