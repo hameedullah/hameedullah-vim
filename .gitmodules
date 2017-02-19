@@ -124,3 +124,6 @@
 [submodule ".vim/bundle/vim-gitgutter"]
 	path = .vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule ".vim/bundle/neocomplete"]
+	path = .vim/bundle/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim.git
