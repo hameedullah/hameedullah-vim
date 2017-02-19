@@ -3,3 +3,4 @@
 .vim/backup/
 .vim/swap/
 .vim/bundle/*/doc/tags
+.vim/.netrwhist

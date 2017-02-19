@@ -289,87 +289,7 @@
     endif
     if exists('+undoreload')  | set undoreload=100000    | endif
 
-    " Status Line Mod {
-        if has('statusline')
-            " Always display the status line, even if only one window is displayed
-            set laststatus=2
 
-            " Function used to display syntax group.
-            function! SyntaxItem()
-                let syntaxitem = synIDattr(synID(line("."),col("."),1),"name")
-                if syntaxitem != ""
-                    let syntaxitem = " [" . syntaxitem . "]"
-                endif
-                return syntaxitem
-            endfunction
-
-            " Function used to display utf-8 sequence.
-            function! ShowUtf8Sequence()
-                try
-                    let p = getpos('.')
-                    redir => utfseq
-                    sil normal! g8
-                    redir End
-                    call setpos('.', p)
-                    return substitute(matchstr(utfseq, '\x\+ .*\x'), '\<\x', '0x&', 'g')
-                catch
-                    return '?'
-                endtry
-            endfunction
-
-
-            " This status line mod taken from spf-13
-            " Broken down into easily includeable segments
-            set statusline=%n                             " buffer number
-            set statusline+=%{'/'.bufnr('$')}\             " buffer count
-            set statusline+=%<%f\ " Filename
-            set statusline+=%w%h%m%r " Options
-            set statusline+=%{fugitive#statusline()} " Git Hotness
-
-            " This taken from the below status line mod
-            " modified by me.
-            " File type information
-            set statusline+=%#User1#                       " highlighting
-            set statusline+=\ [%{&ff}/%Y " start filetype information
-            set statusline+=%{(&key==\"\"?\"\":\"/encr\")} " encrypted?
-            set statusline+=/%{(&fenc==\"\"?&enc:&fenc)}   " encoding
-            set statusline+=%{((exists(\"+bomb\")\ &&\ &bomb)?\"/B\":\"\")} " BOM
-            set statusline+=\] " close filetype information
-
-            set statusline+=\ [%{getcwd()}] " current dir
-            set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
-
-            " This taken from the below status line mod
-            set statusline+=%{SyntaxItem()}                " syntax group under cursor
-
-            set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
-
-            " Fancy status line., taken fomr: http://dominique.pelle.free.fr/.vimrc.html
-            "set statusline =
-            "set statusline+=%#User1#                       " highlighting
-            "set statusline+=%n                             " buffer number
-            "set statusline+=%{'/'.bufnr('$')}\             " buffer count
-            "set statusline+=%#User2#                       " highlighting
-            "set statusline+=%f                             " file name
-            "set statusline+=%#User1#                       " highlighting
-            "set statusline+=%h%m%r%w\                      " flags
-            "set statusline+=%{(&key==\"\"?\"\":\"encr,\")} " encrypted?
-            "set statusline+=%{strlen(&ft)?&ft:'none'},     " file type
-            "set statusline+=%{(&fenc==\"\"?&enc:&fenc)},   " encoding
-            "set statusline+=%{((exists(\"+bomb\")\ &&\ &bomb)?\"B,\":\"\")} " BOM
-            "set statusline+=%{&fileformat},                " file format
-            "set statusline+=%{&spelllang},                 " spell language
-            "set statusline+=%(%{Tlist_Get_Tagname_By_Line()}%), " Function name
-            "set statusline+=%{SyntaxItem()}                " syntax group under cursor
-            "set statusline+=%=                             " indent right
-            "set statusline+=%#User2#                       " highlighting
-            "set statusline+=%{ShowUtf8Sequence()}\         " utf-8 sequence
-            "set statusline+=%#User1#                       " highlighting
-            "set statusline+=U+%04B\                        " Unicode char under cursor
-            "set statusline+=%-6.(%l/%{line('$')},%c%V%)\ %<%P           " position
-        endif
-
-    " }
     " Folding {
         set foldmethod=syntax
         set foldlevelstart=1
@@ -1028,9 +948,14 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
         endif
     endif
 " }
-"
-"
 " Unsorted Changes
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 nmap <Leader>nn :split note:new note<cr>
 nmap <Leader>ns :SearchNotes 
+
+
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+let g:airline_theme='solarized'
