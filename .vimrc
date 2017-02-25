@@ -980,3 +980,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=24
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=10
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+
+
+let g:neocomplete#enable_at_startup = 1
