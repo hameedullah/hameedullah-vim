@@ -627,9 +627,13 @@
 
     " NERDTree {
         " Key Mappings for NERD Tree Plugin
-        map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-        map <leader>e :NERDTreeFind<CR>
-        nmap <leader>nf :NERDTreeFind<CR>
+        "map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+        "map <leader>e :NERDTreeFind<CR>
+        "nmap <leader>nf :NERDTreeFind<CR>
+        map <C-e> <plug>NERDTreeTabsToggle<CR>
+        map <leader>e :NERDTreeTabsFind<CR>
+        nmap <leader>nf :NERDTreeTabsFind<CR>
+
 
         " Other NERD Tree configurations
         let NERDTreeShowBookmarks=1
@@ -642,6 +646,8 @@
         "let NERDTreeDirArrowCollapsible = '-'
         let NERDTreeMinimalUI = 1
         let NERDTreeDirArrows=1
+
+        let g:nerdtree_tabs_open_on_console_startup = 1
         " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -664,10 +670,10 @@ call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 call NERDTreeHighlightFile('pp', 'Magenta', 'none', '#ff00ff', '#151515')
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "
 
     " }
