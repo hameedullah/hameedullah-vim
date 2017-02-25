@@ -127,3 +127,6 @@
 [submodule ".vim/bundle/vim-unimpaired"]
 	path = .vim/bundle/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
+[submodule ".vim/bundle/conflict-marker"]
+	path = .vim/bundle/conflict-marker
+	url = https://github.com/rhysd/conflict-marker.vim.git
