@@ -490,12 +490,6 @@
 " }
 
 " Auto Complete {
-        " Supertab Auto complete {
-            " Taken from spf-13
-            " make sure that omni completion doesn't break supertab
-            let g:SuperTabCrMapping = 0
-        " }
-
         set ofu=syntaxcomplete#Complete
 " }
 
@@ -615,14 +609,6 @@
         let g:snippets_dir="$HOME/.vim/bundle/snipmate-snippets/snippets"
         " Shortcut for reloading snippets, useful when developing
         nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
-    " }
-
-    " Super Tab {"
-        " When using context completion, super tab will fall back to a secondary default
-        " completion type set by |g:SuperTabContextDefaultCompletionType|.
-        let g:SuperTabDefaultCompletionType = "context"
-        let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-
     " }
 
     " NERDTree {
