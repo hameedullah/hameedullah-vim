@@ -630,7 +630,8 @@
         "map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
         "map <leader>e :NERDTreeFind<CR>
         "nmap <leader>nf :NERDTreeFind<CR>
-        map <C-e> <plug>NERDTreeTabsToggle<CR>
+        "map <C-e> <plug>NERDTreeTabsToggle<CR>
+        map <leader>fe <plug>NERDTreeTabsToggle<CR>
         map <leader>e :NERDTreeTabsFind<CR>
         nmap <leader>nf :NERDTreeTabsFind<CR>
 
@@ -983,3 +984,15 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=10
 
 
 let g:neocomplete#enable_at_startup = 1
+
+" Fix for neocomplete and vim multiple cursor conflict
+function! Multiple_cursors_before()
+    exe 'NeoCompleteLock'
+    echo 'Disabled autocomplete'
+endfunction
+
+function! Multiple_cursors_after()
+    exe 'NeoCompleteUnlock'
+    echo 'Enabled autocomplete'
+endfunction
+
