@@ -959,8 +959,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " }
 " Unsorted Changes
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
-nmap <Leader>nn :split note:new note<cr>
-nmap <Leader>ns :SearchNotes 
+"nmap <Leader>nn :split note:new note<cr>
+"nmap <Leader>ns :SearchNotes 
 
 
 set laststatus=2
