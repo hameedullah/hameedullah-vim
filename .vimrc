@@ -575,7 +575,7 @@
     " CtrlP {
         " Temporarily Ctrl+M assigned to ctrlp
         " Ctrl+P are used for adding PHPdoc comments
-        let g:ctrlp_map = '<c-m>'
+        let g:ctrlp_map = '<c-p>'
 
         " there is no point to make it search the whole project
         " slow and takes long time
@@ -716,10 +716,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
         nmap <leader>vu <Plug>VCSUpdate
         nmap <leader>vU <Plug>VCSUnlock
         nmap <leader>vv <Plug>VCSVimDiff
-    " }
-
-    " Ctrl {
-        let g:ctrlp_map = '<c-p>'
     " }
 
     " VimDebugger {
