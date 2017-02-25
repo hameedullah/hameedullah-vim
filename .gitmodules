@@ -4,9 +4,6 @@
 [submodule ".vim/bundle/vim-json"]
 	path = .vim/bundle/vim-json
 	url = git://github.com/leshill/vim-json.git
-[submodule ".vim/bundle/supertab"]
-	path = .vim/bundle/supertab
-	url = git://github.com/ervandew/supertab.git
 [submodule ".vim/bundle/pyflakes"]
 	path = .vim/bundle/pyflakes
 	url = git://github.com/bloveridge/pyflakes-vim.git
