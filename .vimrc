@@ -296,9 +296,13 @@
         set foldlevelstart=1
         " auto open and close folds, comment the following line if you don't
         " liek that "
-        set foldopen=all,insert
-        set foldclose=all
-
+        "set foldopen=all,insert
+        "set foldclose=all
+        nmap zuz (FastFoldUpdate)
+        let g:fastfold_savehook = 1
+        let g:fastfold_fold_command_suffixes = ['x','X','a','A','o','O','c','C']
+        let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+        let g:tex_fold_enabled=1
         let javaScript_fold=1         " JavaScript
         let perl_fold=1               " Perl
         let php_folding=1             " PHP
