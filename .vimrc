@@ -33,14 +33,12 @@
             set nocompatible 
 	endif
     " }
-
     " Cygwin {
         if has("win32unix")
             let g:NERDTreeShowGitStatus = 0
         endif
 
     " }
-    
     " Windows Compatible {
     " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
     " across (heterogeneous) systems easier.
@@ -48,7 +46,10 @@
 	    set runtimepath=$HOME\.vim,$VIM\vimfiles,$VIMRUNTIME,$VIM\vimfiles\after,$HOME\.vim\after
 	endif
     " }
-    
+    " Encoding {
+        scriptencoding utf-8
+        set encoding=utf-8
+    " }
   " GUI Settings {
 " GVIM- (here instead of .gvimrc)
     if has('gui_running')
@@ -59,7 +60,7 @@
             set transparency=5 " Make the window slightly transparent
         endif
     else
-"set term=builtin_ansi " Make arrow and other keys work
+    "set term=builtin_ansi " Make arrow and other keys work
     endif
 " }  
 
@@ -203,7 +204,7 @@
     " until somethign else is required in place of tab
     " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
     " :help listchars "
-    set listchars=eol:$,trail:·,nbsp:·
+    set listchars=tab:¿\ ,trail:¿,extends:#,nbsp:. " Highlight problematic whitespace
 
     " Not sure
     " TODO: read more
