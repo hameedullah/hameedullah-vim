@@ -472,6 +472,8 @@
     map <F5>      :set list!<CR>:set list?<CR>
     imap <F5> <C-O>:set list!<CR><C-O>:set list?<CR>
     nnoremap <silent> <F6> :TlistToggle<CR>
+    noremap <F9> :Copen<cr>
+
 
     " Useful when I am done with search
     " Map <C-L> (redraw screen) to also turn off search highlighting until the
