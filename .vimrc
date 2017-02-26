@@ -510,7 +510,7 @@
     " autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
     " Source .vimrc when I write it.  The nested keyword allows
     " autocommand ColorScheme to fire when sourcing ~/.vimrc.
-    autocmd! BufWritePost .vimrc nested source %
+    "autocmd! BufWritePost .vimrc nested source %
 
     " Automatic commands. {
 
@@ -949,8 +949,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " }
 " Unsorted Changes
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
-"nmap <Leader>nn :split note:new note<cr>
-"nmap <Leader>ns :SearchNotes 
+nmap <Leader>sv :so $MYVIMRC<cr>
 
 
 set laststatus=2
