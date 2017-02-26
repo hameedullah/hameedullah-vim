@@ -711,6 +711,58 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
         nmap <leader>vv <Plug>VCSVimDiff
     " }
 
+    " Vim Fugitive Configuration {
+
+" vimdiff current vs git head (fugitive extension) {{{2
+" Close any corresponding fugitive diff buffer.
+function! MyCloseDiff()
+  if (&diff == 0 || getbufvar('#', '&diff') == 0)
+        \ && (bufname('%') !~ '^fugitive:' && bufname('#') !~ '^fugitive:')
+    echom "Not in diff view."
+    return
+  endif
+
+  diffoff " safety net / required to workaround powerline issue
+
+  " Close current buffer if alternate is not fugitive but current one is.
+  if bufname('#') !~ '^fugitive:' && bufname('%') =~ '^fugitive:'
+    if bufwinnr("#") == -1
+      " XXX: might not work reliable (old comment)
+      "b #
+      bd
+    else
+      bd
+    endif
+  else
+    bd #
+  endif
+endfunction
+" nnoremap <Leader>gd :Gdiff<cr>
+
+
+    nnoremap <silent> <Leader>gd :if !&diff \|\| winnr('$') == 1 \| FollowSymlink \| Gvdiff \| else \| call MyCloseDiff() \| endif <cr>
+nnoremap <Leader>gDm :Gvdiff master:%<cr>
+nnoremap <Leader>gDom :Gvdiff origin/master:%<cr>
+nnoremap <Leader>gDs :Gvdiff stash:%<cr>
+nnoremap <Leader>gbl :Gblame<cr>
+nnoremap <Leader>gl :silent! Glog<cr>
+nnoremap <Leader>gs :Gstatus<cr>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <leader>go :Git checkout<Space>
+nnoremap <leader>gp :Ggrep<Space>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <Leader>gbr :Git branch<Space>
+nnoremap <Leader>gc :Gcommit -v -q<CR>
+nnoremap <Leader>ga :Gcommit --ammend<CR>
+nnoremap <Leader>gt :Gcommit -v -q %<CR>
+command! -nargs=1 Gcm Gcommit -m <q-args>
+
+nnoremap <leader>gps :Dispatch! git push<CR>
+nnoremap <leader>gpl :Dispatch! git pull<CR>
+    " }
+
     " VimDebugger {
         " Eclipse debugger commands
         "   F5      Step into
