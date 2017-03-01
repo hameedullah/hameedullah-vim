@@ -15,7 +15,7 @@
 "                                                               "
 " Target:  Make the .vimrc which I can resrouce any time        "
 "          Tips for target: au! function!                       "
-"                                                               " 
+"                                                               "
 " Disclaimer:                                                   "
 "          Spf-13 is a very good project, but its an attempt to "
 "          make vim an ide not hacker friendly just like other  "
@@ -30,7 +30,7 @@
         " We need to set nocompatible mode to stop Vim being compatible with vi
         " This also reset options when you resource your .vimrc
 	if &compatible
-            set nocompatible 
+            set nocompatible
 	endif
     " }
     " Cygwin {
@@ -62,12 +62,12 @@
     else
     "set term=builtin_ansi " Make arrow and other keys work
     endif
-" }  
+" }
 
     " Modeline { "
         set modeline
     "}
-   
+
     " Pathogen {
         " This is actually the cool idea to keep plugins in their own separate folder to have a cleaner .vim-directory
         " Giving it a try
@@ -77,7 +77,7 @@
         call pathogen#infect()
         call pathogen#helptags()
     " }
-    
+
     " Color Scheme Loading Fix {
         " Taken from: http://dominique.pelle.free.fr/.vimrc.html
         " Unlet g:color_names to avoid loading color scheme several times
@@ -125,7 +125,7 @@
         set ignorecase
         set smartcase
     " }
-    
+
     " Security {
         " Autowrite unsaved buffers
         " Alternatives include using tabs or split windows instead of re-using the same
@@ -137,7 +137,7 @@
         " line script http://www.vim.org/scripts/script.php?script_id=1876
         " TODO: Check how both options work
         " set nomodeline
-        
+
         " set backup
 
         " TODO: Find about cryptmethod
@@ -177,7 +177,7 @@
             colorscheme solarized
             let g:solarized_termtrans = 1
 
-            
+
 
         endif
     " }
@@ -204,7 +204,7 @@
     " until somethign else is required in place of tab
     " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
     " :help listchars "
-    set listchars=tab:¿\ ,trail:¿,extends:#,nbsp:. " Highlight problematic whitespace
+    set listchars=tab:â€º\ ,trail:â€¢,extends:#,nbsp:. " Highlight problematic whitespace
 
     " Not sure
     " TODO: read more
@@ -395,7 +395,7 @@
 
     " Python Indentation {
         " PEP8 Coding Standard baby - http://www.python.org/dev/peps/pep-0008/
-        autocmd FileType python setlocal tabstop=8 
+        autocmd FileType python setlocal tabstop=8
         autocmd FileType python setlocal expandtab
         autocmd FileType python setlocal shiftwidth=4
         autocmd FileType python setlocal softtabstop=4
@@ -429,7 +429,7 @@
 
     " Copy to clipboard
     vmap <C-C> "+ygv"zy`>
-    
+
     " Easier moving in tabs and windows
     " only j and k are enough for me
     map <C-S-J> <C-W>j<C-W>_
@@ -504,7 +504,7 @@
     " This section's purpose is to setup file type level settings
     " mainly for development purpose
 
-    " Removes trailing whitespaces from code  
+    " Removes trailing whitespaces from code
     " This causes vim to hang for 5-6 seconds when writing some files
     " shold map it to some key, that will be more useful
     " autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -592,7 +592,7 @@
         " once I do the comparison of command-to and ctrlp
         "nmap <leader>t :CtrlP<CR>
     " }
-    
+
     " Delimitmate {
         au FileType * let b:delimitMate_autoclose = 1
 
@@ -780,7 +780,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
         "map <F5> :DbgStepInto<CR>
         "map <S-F5> :DbgStepOut<CR>
         "map <F6> :DbgStepOver<CR>
-        "map <C-F11> :DbgRun<CR> 
+        "map <C-F11> :DbgRun<CR>
         " TODO: Play with debug detach and map it if useful
         "map <F6> :DbgDetach<CR>
         "map <F8> :DbgToggleBreakpoint<CR>
@@ -789,56 +789,56 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
         "map <F9> :DbgRefreshWatch<CR>
         "map <S-F9> :DbgAddWatch<CR>
     " }
-    
+
     " Lusty Eplorer and Juggler {
         " disable lusty juggler for timebeing, as it is breaking delimitMate
         let g:loaded_lustyjuggler = "yep"
         let g:LustyExplorerSuppressRubyWarning = 1
 
         " Lusty Explorer default key mappings
-        ":LustyFilesystemExplorer 
-        ":LustyFilesystemExplorerFromHere 
-        ":LustyBufferExplorer 
-        ":LustyBufferGrep (for searching through all open buffers) 
+        ":LustyFilesystemExplorer
+        ":LustyFilesystemExplorerFromHere
+        ":LustyBufferExplorer
+        ":LustyBufferGrep (for searching through all open buffers)
 
-        "<Leader>lf  - Opens filesystem explorer. 
-        "<Leader>lr  - Opens filesystem explorer at the directory of the current file.   
-        "<Leader>lb  - Opens buffer explorer. 
-        "<Leader>lg  - Opens buffer grep. 
+        "<Leader>lf  - Opens filesystem explorer.
+        "<Leader>lr  - Opens filesystem explorer at the directory of the current file.
+        "<Leader>lb  - Opens buffer explorer.
+        "<Leader>lg  - Opens buffer grep.
 
         " Lusty juggler default key mappings
         " very useful for quickly switching between recently opened buffers
         " buffer explorer is always there to see all opened buffers with useful information
         " but this one allows you to quickly swtich between them and lists them
         " in recently opened order
-        "Launch the juggler with this key combo: 
+        "Launch the juggler with this key combo:
 
-        "<Leader>lj 
+        "<Leader>lj
 
-        "The command bar at bottom is replaced with a new bar showing the names of your currently opened buffers in most-recently-used order. 
+        "The command bar at bottom is replaced with a new bar showing the names of your currently opened buffers in most-recently-used order.
 
-        "The buffer names are mapped to these keys: 
+        "The buffer names are mapped to these keys:
 
-        "1st --> a or 1 
-        "2nd --> s or 2 
-        "3rd --> d or 3 
-        "4th --> f or 4 
-        "5th --> g or 5 
-        "6th --> h or 6 
-        "7th --> j or 7 
-        "8th --> k or 8 
-        "9th --> l or 9 
-        "10th --> ; or 0 
+        "1st --> a or 1
+        "2nd --> s or 2
+        "3rd --> d or 3
+        "4th --> f or 4
+        "5th --> g or 5
+        "6th --> h or 6
+        "7th --> j or 7
+        "8th --> k or 8
+        "9th --> l or 9
+        "10th --> ; or 0
 
-        "So if you type "f" or "4", the fourth buffer name will be highlighted and the bar will shift to center it as necessary (and show more of the buffer names on the right). 
+        "So if you type "f" or "4", the fourth buffer name will be highlighted and the bar will shift to center it as necessary (and show more of the buffer names on the right).
 
-        "If you want to switch to that buffer, press "f" or "4" again or press "<ENTER>".  Alternatively, press one of the other mapped keys to highlight another buffer. 
+        "If you want to switch to that buffer, press "f" or "4" again or press "<ENTER>".  Alternatively, press one of the other mapped keys to highlight another buffer.
     " }
-    
+
     " PDV phpDocumentor for Vim Plugin {
         " PHP doc key mappings
-        "inoremap <C-d> <ESC>:call PhpDocSingle()<CR>i 
-        "nnoremap <C-d> :call PhpDocSingle()<CR> 
+        "inoremap <C-d> <ESC>:call PhpDocSingle()<CR>i
+        "nnoremap <C-d> :call PhpDocSingle()<CR>
         "vnoremap <C-d> :call PhpDocRange()<CR>
 
         nmap <Leader>pd :call PhpDocSingle()<CR>
@@ -861,7 +861,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
         let g:pdv_cfg_ReturnVal = "void"
 
     " }
-    
+
     " Tasklist {
         " A todo reminder plugin that lists all your TODO, FIXME in current file:
         " http://www.vim.org/scripts/script.php?script_id=2607
@@ -876,7 +876,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
         let g:tlWindowPosition=1
 
     " }
-    
+
     " Taglist {
         " Taken from spf-13
         let Tlist_Auto_Highlight_Tag = 1
@@ -924,7 +924,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
             endif
         endfor
     endfunction
-    call InitializeDirectories() 
+    call InitializeDirectories()
 " }
 
 " Other Not Aligned Options {
@@ -965,7 +965,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
     "\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
     " this key mapping never worked for me
-    "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : "  
+    "inoremap <expr> <M-,> pumvisible() ? '<C-n>' : "
     "    \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 
