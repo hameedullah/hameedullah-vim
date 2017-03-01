@@ -689,26 +689,26 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
     " VCSCommand Configuration {
         " delete vcs buffer on hide
-        let VCSCommandDeleteOnHide = 1
+        "let VCSCommandDeleteOnHide = 1
 
         " Custom Mappings
-        nmap <leader>vb :VCSBlame<CR>
-        nmap <leader>va <Plug>VCSAdd
-        nmap <leader>vn <Plug>VCSAnnotate
-        nmap <leader>vN <Plug>VCSAnnotate!
-        nmap <leader>vc <Plug>VCSCommit
-        nmap <leader>vD <Plug>VCSDelete
-        nmap <leader>vd <Plug>VCSDiff
-        nmap <leader>vg <Plug>VCSGotoOriginal
-        nmap <leader>vG <Plug>VCSGotoOriginal!
-        nmap <leader>vi <Plug>VCSInfo
-        nmap <leader>vl <Plug>VCSLog
-        nmap <leader>vL <Plug>VCSLock
-        nmap <leader>vr <Plug>VCSReview
-        nmap <leader>vs <Plug>VCSStatus
-        nmap <leader>vu <Plug>VCSUpdate
-        nmap <leader>vU <Plug>VCSUnlock
-        nmap <leader>vv <Plug>VCSVimDiff
+        "nmap <leader>vb :VCSBlame<CR>
+        "nmap <leader>va <Plug>VCSAdd
+        "nmap <leader>vn <Plug>VCSAnnotate
+        "nmap <leader>vN <Plug>VCSAnnotate!
+        "nmap <leader>vc <Plug>VCSCommit
+        "nmap <leader>vD <Plug>VCSDelete
+        "nmap <leader>vd <Plug>VCSDiff
+        "nmap <leader>vg <Plug>VCSGotoOriginal
+        "nmap <leader>vG <Plug>VCSGotoOriginal!
+        "nmap <leader>vi <Plug>VCSInfo
+        "nmap <leader>vl <Plug>VCSLog
+        "nmap <leader>vL <Plug>VCSLock
+        "nmap <leader>vr <Plug>VCSReview
+        "nmap <leader>vs <Plug>VCSStatus
+        "nmap <leader>vu <Plug>VCSUpdate
+        "nmap <leader>vU <Plug>VCSUnlock
+        "nmap <leader>vv <Plug>VCSVimDiff
     " }
 
     " Vim Fugitive Configuration {
