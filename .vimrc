@@ -757,6 +757,7 @@ nnoremap <Leader>gbr :Git branch<Space>
 nnoremap <Leader>gc :Gcommit -v -q<CR>
 nnoremap <Leader>ga :Gcommit --ammend<CR>
 nnoremap <Leader>gt :Gcommit -v -q %<CR>
+nnoremap <Leader>gh :Gcommit -p<CR>
 command! -nargs=1 Gcm Gcommit -m <q-args>
 
 nnoremap <leader>gps :Dispatch! git push<CR>
