@@ -70,9 +70,6 @@
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
 [submodule ".vim/bundle/tlib"]
 	path = .vim/bundle/tlib
 	url = git://github.com/tomtom/tlib_vim.git
@@ -136,3 +133,6 @@
 [submodule ".vim/bundle/undotree"]
 	path = .vim/bundle/undotree
 	url = https://github.com/mbbill/undotree.git
+[submodule ".vim/bundle/ale"]
+	path = .vim/bundle/ale
+	url = https://github.com/w0rp/ale.git

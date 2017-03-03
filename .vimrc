@@ -1084,3 +1084,19 @@ command! -bar FollowSymlink call MyFollowSymlink()
 "let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
 
+
+"ALE configuration
+" Write this in your vimrc file
+let g:ale_lint_on_save = 1
+let g:ale_lint_delay = 1000
+"let g:ale_lint_on_text_changed = 0
+
+" You can disable this option too
+" if you don't want linters to run on opening a file
+"let g:ale_lint_on_enter = 0
+"nmap <Leader>sv :so $MYVIMRC<cr>
+nmap <silent> <Leader>ep <Plug>(ale_previous_wrap)
+nmap <silent> <leader>en <Plug>(ale_next_wrap)
+nmap <leader>lt :ALEToggle<CR>
+
+
