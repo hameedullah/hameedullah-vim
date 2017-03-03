@@ -29,9 +29,9 @@
     " Compatibly {
         " We need to set nocompatible mode to stop Vim being compatible with vi
         " This also reset options when you resource your .vimrc
-	if &compatible
+        if &compatible
             set nocompatible
-	endif
+        endif
     " }
     " Cygwin {
         if has("win32unix")
@@ -42,9 +42,9 @@
     " Windows Compatible {
     " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
     " across (heterogeneous) systems easier.
-	if has('win32') || has('win64')
-	    set runtimepath=$HOME\.vim,$VIM\vimfiles,$VIMRUNTIME,$VIM\vimfiles\after,$HOME\.vim\after
-	endif
+        if has('win32') || has('win64')
+            set runtimepath=$HOME\.vim,$VIM\vimfiles,$VIMRUNTIME,$VIM\vimfiles\after,$HOME\.vim\after
+        endif
     " }
     " Encoding {
         scriptencoding utf-8
