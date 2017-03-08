@@ -641,7 +641,9 @@
         let NERDTreeMinimalUI = 1
         let NERDTreeDirArrows=1
 
-        let g:nerdtree_tabs_open_on_console_startup = 1
+        "Open NERDTree on console vim startup. (When set to 2, open only if directory was given as startup argument).
+        let g:nerdtree_tabs_open_on_console_startup = 2 "(default: 0)
+
         " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
