@@ -261,8 +261,8 @@
     " set cmdheight=2
 
     " Display line numbers on the left
-    " I prefer to use the F3 mapping, see F3 mapping below
-    " set number
+    set number
+    set relativenumber
 
     " Quickly time out on keycodes, but never time out on mappings
     "set notimeout ttimeout ttimeoutlen=200
@@ -277,7 +277,7 @@
     " Stop certain movements from always going to the first character of a line.
     " While this behaviour deviates from that of Vi, it does what most users
     " coming from other editors would expect.
-    set nostartofline
+    "set nostartofline
 
     " Show match, briefly jumps to the matching bracket
     set showmatch
@@ -465,8 +465,8 @@
     noremap <up>   gk
 
     " <F2 has been mapped to pastetoggle see :set pastetoggle"
-    map <F3>      :set number!<CR>:set number?<CR>
-    imap <F3> <C-O>:set number!<CR><C-O>:set number?<CR>
+    "map <F3>      :set number!<CR>:set number?<CR>
+    "imap <F3> <C-O>:set number!<CR><C-O>:set number?<CR>
     map <F4>      :set hlsearch!<CR>:set hlsearch?<CR>
     imap <F4> <C-O>:set hlsearch!<CR><C-O>:set hlsearch?<CR>
     map <F5>      :set list!<CR>:set list?<CR>
@@ -643,6 +643,7 @@
 
         "Open NERDTree on console vim startup. (When set to 2, open only if directory was given as startup argument).
         let g:nerdtree_tabs_open_on_console_startup = 2 "(default: 0)
+        let g:nerdtree_tabs_open_on_new_tab = 0 "(default: 1)
 
         " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
