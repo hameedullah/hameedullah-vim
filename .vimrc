@@ -64,6 +64,9 @@
     endif
 " }
 
+   " Path variable {
+        set path+=**
+   " }
     " Modeline { "
         set modeline
     "}
@@ -205,6 +208,7 @@
     " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
     " :help listchars "
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+    set list
 
     " Not sure
     " TODO: read more
@@ -481,8 +485,8 @@
     nnoremap <C-L> :nohl<CR><C-L>
 
     " Serch word under cursor in current dir
-    map <C-F> <esc>:Grep<CR>
-    map <C-R> <esc>:Rgrep<CR>
+    "map <C-F> <esc>:Grep<CR>
+    "map <C-R> <esc>:Rgrep<CR>
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
@@ -1103,4 +1107,10 @@ nmap <silent> <Leader>ep <Plug>(ale_previous_wrap)
 nmap <silent> <leader>en <Plug>(ale_next_wrap)
 nmap <leader>lt :ALEToggle<CR>
 
+let g:ale_linter_aliases = {'Vagrantfile': 'vagrantfile', 'Puppetfile': 'puppetfile'}
+let g:ale_linters = {'vagrantfile': [], 'puppetfile': []}
+augroup FiletypeGroup
+    autocmd!
+    au BufNewFile,BufRead Vagrantfile set filetype=vagrantfile
+augroup END
 
